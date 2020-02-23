@@ -1,3 +1,8 @@
+### Traffic Statistics Website ### 
+## Team Coders
+
+# Stack: MERN stack with Password.js for authentication.
+
 ## _**PLEASE READ THIS TO COMPLETION BEFORE ASKING ANY QUESTIONS!**_
 
 ### _**IMPORTANT NOTES**_ - 

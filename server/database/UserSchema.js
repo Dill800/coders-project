@@ -8,4 +8,6 @@ const userSchema = new mongoose.Schema({
     accessLevel : {type: mongoose.Number, required: true}
 });
 
-export default mongoose.model(collectionName, userSchema);
+module.exports.init = () => {
+    mongoose.model(collectionName, userSchema);
+} 

@@ -1,6 +1,6 @@
-import express from './config/express.js'
-import mongoose from 'mongoose'
-import config from './database/db_config.js'
+const express = require('./config/express.js')
+const mongoose = require('mongoose')
+const  config = require('./database/db_config.js')
  
 // Use env port or default
 const port = process.env.PORT || 5000;

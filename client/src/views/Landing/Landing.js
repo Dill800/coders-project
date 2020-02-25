@@ -50,7 +50,7 @@ const Landing = (props) => {
             </Row>
 
             <div className='forgot-password-container'>
-                <Link>Forgot Password?</Link>
+                <Link to='/forgot-password'>Forgot Password?</Link>
             </div>
 
         </Container>

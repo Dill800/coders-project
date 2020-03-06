@@ -74,7 +74,7 @@ const Register = (props) => {
   <div >
   <Form.Group className="inline" id="formGridCheckbox">
     <Form.Check type="checkbox" label="I agree with the"/>
-<a href=" ">&nbsp;Terms and conditions.</a>
+<a href=" ">&nbsp;terms and conditions.</a>
   </Form.Group>
   </div>
 

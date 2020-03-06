@@ -17,8 +17,18 @@
     font-size: 60px;
 }
 
-.already-have-account-container {
-    display: flex;
-    justify-content: center;
-    padding-top: 2%;
+.already-have-an-account-container {
+    text-align: center;
+
 }
+
+.button {
+    text-align:center;
+}
+
+.inline {
+    display:inline-flex;
+    justify-content: center;
+    white-space: normal;
+}
+

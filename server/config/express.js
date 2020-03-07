@@ -3,7 +3,8 @@ const path = require('path'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
-    exampleRouter = require('../routes/examples.server.routes'),
+    login = require('../routes/login.js'),
+    passport = require('./passport')
     session = require('express-session');
 
 module.exports.init = () => {
@@ -20,6 +21,12 @@ module.exports.init = () => {
     // initialize app
     const app = express();
 
+    // enable request logging for development debugging
+    app.use(morgan('dev'));
+
+    // body parsing middleware
+    app.use(bodyParser.json());
+
     //enable user-sessions (using cookies)
     app.use(
         session({
@@ -29,14 +36,12 @@ module.exports.init = () => {
         })
       )
 
-    // enable request logging for development debugging
-    app.use(morgan('dev'));
-
-    // body parsing middleware
-    app.use(bodyParser.json());
+    //Passport
+    app.use(passport.initialize())
+    app.use(passport.session()) // calls the deserializeUser
 
     // add a router
-    app.use('/api/example', exampleRouter);
+    app.use('/login', login);
 
     if (process.env.NODE_ENV === 'production') {
         // Serve any static files

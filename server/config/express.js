@@ -4,7 +4,7 @@ const path = require('path'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
     login = require('../routes/login.js'),
-    passport = require('./passport')
+    passport = require('../controllers/passport')
     session = require('express-session');
 
 module.exports.init = () => {
@@ -12,7 +12,7 @@ module.exports.init = () => {
         connect to database
         - reference README for db uri
     */
-    mongoose.connect(process.env.DB_URI || require('./config.example').db.uri, {
+    mongoose.connect(process.env.DB_URI || require('./config').db.uri, {
         useNewUrlParser: true
     });
     mongoose.set('useCreateIndex', true);

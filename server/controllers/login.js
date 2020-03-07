@@ -1,7 +1,7 @@
 const user = require('../database/UserSchema.js')
 
 
-export const newUser = (req, res) => {
+function newUser(req, res){
     console.log('User Signup')
     const {name, username, pw} = req.body
 
@@ -29,3 +29,5 @@ export const newUser = (req, res) => {
         }
     })
 }
+
+module.exports = newUser

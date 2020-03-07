@@ -2,7 +2,7 @@ const express = require('express')
 const passport = require('../controllers/passport')
 const login_controller = require('../controllers/login.js')
 
-router = express.router()
+router = express.Router()
 
 // Log access to login router
 router.use((req,res,next) => {
@@ -44,4 +44,4 @@ router.get('/user', (req, res) => {
     // TODO
 })
 
-modules.exports = router;
+module.exports = router;

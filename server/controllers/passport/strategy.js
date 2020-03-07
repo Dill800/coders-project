@@ -18,3 +18,5 @@ const strategy = new LocalStrategy(
         })
     }
 )
+
+module.exports = strategy

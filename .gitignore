@@ -54,3 +54,5 @@ yarn-error.log*
 
 # User-specific stuff
 .idea/*
+
+*.env

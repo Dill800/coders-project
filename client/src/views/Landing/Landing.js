@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {Button, Container, Col, Row, Alert, Form, Grid, Jumbotron} from 'react-bootstrap'
 import './Landing.css'
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Landing = (props) => {
 
@@ -10,7 +11,14 @@ const Landing = (props) => {
 
     const submit = (event) => {
         event.preventDefault();
-        console.log('email: ' + email + " pass: " + pass);
+        console.log('email: ' + email);
+        // request to server
+        axios.post('/login/', {
+            username: email,
+            pw: pass
+        }).then(response => {
+            console.log(response)
+        })
     }
 
     const onEmailChange = (event) => {

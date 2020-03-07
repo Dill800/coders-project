@@ -1,4 +1,6 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose')
+const bcrypt = require('bcryptjs');
+
 
 const collectionName = 'users'
 const userSchema = new mongoose.Schema({
@@ -8,6 +10,26 @@ const userSchema = new mongoose.Schema({
     accessLevel : {type: mongoose.Number, required: true}
 });
 
-module.exports.init = () => {
-    mongoose.model(collectionName, userSchema);
-} 
+// Password hashing methods
+userSchema.methods = {
+    checkPassword: function (inputPassword) {
+		return bcrypt.compareSync(inputPassword, this.passwordHash)
+	},
+	hashPassword: plainTextPassword => {
+		return bcrypt.hashSync(plainTextPassword, 10)
+	}
+}
+
+userSchema.pre('save', function(next) {
+    if (!this.passwordHash) {
+		console.log('models/user.js =======NO PASSWORD PROVIDED=======')
+		next()
+	} else {
+		console.log('models/user.js hashPassword in pre save');
+		this.passwordHash = this.hashPassword(this.passwordHash)
+		next()
+	}
+})
+
+var User = mongoose.model(collectionName, userSchema);
+module.exports = User

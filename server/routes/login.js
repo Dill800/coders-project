@@ -1,7 +1,6 @@
 const express = require('express')
-const user = require('../database/UserSchema.js')
 const passport = require('../passport')
-
+const login_controller = require('../controllers/login.js')
 
 router = express.router()
 
@@ -27,30 +26,7 @@ router.post('/', (req, res, next) => {
 
 // create new account
 router.post('/new', (req, res) => {
-    console.log('User Signup')
-    const {username, pw} = req.body
-
-    user.findOne({email: username}, (err, user)=> {
-        if(err){
-            console.log('user.js post error when trying to find user.')
-        }
-        else if(user){
-            res.json({error: 'Sorry, already a user with that email.'})
-        }
-        else{
-            // the password will be automatically hashed by mongo before saving (see UserScema.js)
-            const newUser = new user({
-                email : username,
-                password: pw
-            })
-            newUser.save((err, savedUser) => {
-                if(err){
-                    return res.json('Error saving user.')
-                }
-                res.json(savedUser)
-            })
-        }
-    })
+    login_controller.newUser(req, res)
 })
 
 router.post('/logout', (req, res) => {
@@ -64,8 +40,8 @@ router.post('/logout', (req, res) => {
 })
 
 //get user info
-router.get('/', (req, res) => {
-
+router.get('/user', (req, res) => {
+    // TODO
 })
 
 modules.exports = router;

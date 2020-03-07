@@ -3,7 +3,8 @@ const path = require('path'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
-    exampleRouter = require('../routes/examples.server.routes');
+    exampleRouter = require('../routes/examples.server.routes'),
+    session = require('express-session');
 
 module.exports.init = () => {
     /* 
@@ -18,6 +19,15 @@ module.exports.init = () => {
 
     // initialize app
     const app = express();
+
+    //enable user-sessions (using cookies)
+    app.use(
+        session({
+        secret: 'codersproject', //pick a random string to make the hash that is generated secure
+        resave: false, //required
+        saveUninitialized: false //require
+        })
+      )
 
     // enable request logging for development debugging
     app.use(morgan('dev'));

@@ -1,5 +1,5 @@
 const express = require('express')
-const passport = require('../passport')
+const passport = require('../controllers/passport')
 const login_controller = require('../controllers/login.js')
 
 router = express.router()

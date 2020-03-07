@@ -1,5 +1,5 @@
 const passport = require('passport')
-const LocalStrategy = require('./strategy.js')
+const LocalStrategy = require('./strategy')
 const User = require('../../database/UserSchema.js')
 
 // called on login, saves the id to session req.session.passport.user = {id:'..'}

@@ -1,10 +1,10 @@
-const user = require('../../database/UserSchema.js')
+const User = require('../../database/UserSchema.js')
 const LocalStrategy = require('passport-local').Strategy
 
 const strategy = new LocalStrategy(
-    {usernameField : 'username'},
+    {usernameField : 'username', passwordField: 'pw'},
     (username, password, done) => {
-        user.findOne({email: username}, (err, user) => {
+        User.findOne({email: username}, (err, user) => {
             if (err){
                 return done(err);
             }

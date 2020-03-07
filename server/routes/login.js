@@ -26,7 +26,7 @@ router.post('/', (req, res, next) => {
 
 // create new account
 router.post('/new', (req, res) => {
-    login_controller.newUser(req, res)
+    login_controller(req, res)
 })
 
 router.post('/logout', (req, res) => {

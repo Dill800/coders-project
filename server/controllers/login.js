@@ -1,11 +1,11 @@
-const user = require('../database/UserSchema.js')
+const User = require('../database/UserSchema.js')
 
 
 function newUser(req, res){
     console.log('User Signup')
     const {name, username, pw} = req.body
-
-    user.findOne({email: username}, (err, user)=> {
+    console.log(req.body)
+    User.findOne({email: username}, (err, user)=> {
         if(err){
             console.log('user.js post error when trying to find user.')
         }
@@ -14,7 +14,7 @@ function newUser(req, res){
         }
         else{
             // the password will be automatically hashed by mongo before saving (see UserScema.js)
-            const newUser = new user({
+            const newUser = new User({
                 name: name,
                 email : username,
                 passwordHash: pw,

@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
-import {Button, Container, Col, Row, Form,} from 'react-bootstrap'
+import {Alert, Button, Container, Col, Row, Form,} from 'react-bootstrap'
 import './Register.css'
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Register = (props) => {
 
@@ -12,7 +13,19 @@ const Register = (props) => {
     
     const submit = (event) => {
         event.preventDefault();
-        console.log('email: ' + email + ' password: ' + pass + ' city: ' + city + ' state: ' + state);
+        axios.post('/login/new/', {
+
+          email: email,
+          pw: pass,
+          city: city,
+          state: state
+
+        }).then(response => {
+            console.log(response.status)
+        }).catch(err => {
+          window.alert("Account already exists!");
+          console.log(err);
+        })
     }
 
     const onEmailChange = (event) => {
@@ -85,7 +98,7 @@ const Register = (props) => {
   </Form.Group>
 </Form>
 <div className='already-have-an-account-container'>
-                <Link>Already Have an Account?</Link>
+                <Link to='/'>Already Have an Account?</Link>
             </div>
             </Col>
             </Row>

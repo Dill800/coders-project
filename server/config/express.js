@@ -12,7 +12,10 @@ module.exports.init = () => {
         connect to database
         - reference README for db uri
     */
-    mongoose.connect(process.env.DB_URI || require('./config').db.uri, {
+
+    // Heroky Deployment
+    mongoose.connect(process.env.DB_URI, {
+    //mongoose.connect(process.env.DB_URI || require('./config').db.uri, {
         useNewUrlParser: true
     });
     mongoose.set('useCreateIndex', true);

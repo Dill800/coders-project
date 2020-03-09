@@ -60,6 +60,9 @@ const Landing = (props) => {
             <div className='forgot-password-container'>
                 <Link to='/forgot-password'>Forgot Password?</Link>
             </div>
+            <div className='create-account-container'>
+                <Link to='/register'>Register</Link>
+            </div>
 
         </Container>
     )

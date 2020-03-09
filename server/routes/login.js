@@ -11,12 +11,9 @@ router.use((req,res,next) => {
 })
 
 // log into account. 
-/*
 router.post('/', (req, res, next) => {
-    console.log("\n")
     console.log('User Login: ')
     console.log(req.body)
-    console.log("\n")
     next()
 }, passport.authenticate('local'), // see ./passport for auth strategy
 (req, res) => {
@@ -26,22 +23,9 @@ router.post('/', (req, res, next) => {
     };
     res.send(userinfo);
 })
-*/
-
-router.post('/', passport.authenticate('local', {
-    successRedirect: '/dashboard',
-    failureRedirect: '/'
-}))
-
-router.get('/dashboard', (req, res) => {
-    console.log("at dashboard");
-    res.send("at dashboard");
-})
 
 // create new account
 router.post('/new', (req, res) => {
-    console.log('NEW ACC ENDPOINT HIT');
-    
     login_controller(req, res)
 })
 

@@ -21,7 +21,7 @@ const App = () => {
     <div>
       <Switch>
         <Route exact path="/Home" component={Home} />
-        <Route exact path="/" component={Landing}/>
+        <Route exact path="/" render={() => <Landing/>}/>
         <Route exact path="/register" component={Register}/>
         <Route exact path="/forgot-password" component={Forgot}/>
         <Route component={NotFound}/>

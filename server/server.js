@@ -10,7 +10,7 @@ const app = express.init()
 app.listen(port, () => console.log(`Server now running on port ${port}!`));
 
 // heroku deploy, use process.env.MONGODB_URI
-mongoose.connect(config.db.uri, {useNewUrlParser: true, useUnifiedTopology: true}, () => {
+mongoose.connect(process.env.MONGODB_URI || config.db.uri, {useNewUrlParser: true, useUnifiedTopology: true}, () => {
     console.log("Database Connection Successful");
     console.log(config.db.uri);
 });

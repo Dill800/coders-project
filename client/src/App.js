@@ -19,15 +19,13 @@ const App = () => {
   const [url, setUrl] = useState();
   return (
     <div>
-      <Router>
-        <Switch>
-          <Route exact path="/Home" component={Home} />
-          <Route exact path="/" render={() => <Landing/>}/>
-          <Route exact path="/Register" component={Register}/>
-          <Route exact path="/Forgot" component={Forgot}/>
-          <Route component={NotFound}/>
-        </Switch>
-      </Router>
+      <Switch>
+        <Route exact path="/Home" component={Home} />
+        <Route exact path="/" component={Landing}/>
+        <Route exact path="/register" component={Register}/>
+        <Route exact path="/forgot-password" component={Forgot}/>
+        <Route component={NotFound}/>
+      </Switch>
     </div>
   );
 }

@@ -2,21 +2,27 @@ const User = require('../database/UserSchema.js')
 
 
 function newUser(req, res){
+    console.log('\n')
     console.log('User Signup')
-    const {name, username, pw} = req.body
-    console.log(req.body)
-    User.findOne({email: username}, (err, user)=> {
+    console.log(req.body);
+    const {email, pw, city, state} = req.body
+    console.log('\n')
+    User.findOne({email: email}, (err, user)=> {
+        console.log('finding one');
         if(err){
             console.log('user.js post error when trying to find user.')
         }
         else if(user){
-            res.json({error: 'Sorry, already a user with that email.'})
+            console.log('already user in there');
+            res.status(500).send();
         }
         else{
             // the password will be automatically hashed by mongo before saving (see UserScema.js)
+            console.log('Adding user to DB...');
             const newUser = new User({
-                name: name,
-                email : username,
+                email : email,
+                city : city,
+                state: state,
                 passwordHash: pw,
                 accessLevel: 0
             })

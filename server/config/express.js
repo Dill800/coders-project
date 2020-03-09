@@ -14,7 +14,7 @@ module.exports.init = () => {
     */
 
     // Heroky Deployment
-    mongoose.connect(process.env.DB_URI, {
+    mongoose.connect(process.env.MONGODB_URI, {
     //mongoose.connect(process.env.DB_URI || require('./config').db.uri, {
         useNewUrlParser: true
     });

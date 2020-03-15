@@ -2,7 +2,6 @@ const express = require('express')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
-const  config = require('./config/config.js')
 const path = require('path')
 
 const userRouter = require('./routes/userRouter')
@@ -19,10 +18,8 @@ app.use(bodyParser.json());
 app.use('/users', userRouter);
 
 // heroku deploy first priority, then take config file
-mongoose.connect(process.env.MONGODB_URI || config.db.uri, {useNewUrlParser: true, useUnifiedTopology: true}, () => {
+mongoose.connect(process.env.MONGODB_URI || require('./config/config').db.uri, {useNewUrlParser: true, useUnifiedTopology: true}, () => {
     console.log("Database Connection Successful");
-    console.log(process.env.MONGODB_URI)
-    console.log(config.db.uri)
 });
 
 if (process.env.NODE_ENV === 'production') {

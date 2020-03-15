@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
 import {Button, Container, Col, Row, Alert, Form, Grid, Jumbotron, Modal} from 'react-bootstrap'
-import './Landing.css'
+import './Login.css'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 const tokenManager = require('../../tokenManager')
 
-const Landing = (props) => {
+const Login = (props) => {
 
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
@@ -36,7 +36,7 @@ const Landing = (props) => {
 
                 props.setCurrUser(tokenManager.getCurrentUser())
 
-                props.history.push('/Home')
+                props.history.push('/dashboard')
 
             }
             else {
@@ -104,4 +104,4 @@ const Landing = (props) => {
 
 }
 
-export default Landing;
+export default Login;

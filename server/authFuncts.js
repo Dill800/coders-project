@@ -5,7 +5,7 @@ const secret = process.env.secret || 'thesecret'
 function signToken(user) {
     const userData = user.toObject();
     delete userData.passwordHash;
-    return jwt.sign(userData, secret)
+    return jwt.sign(userData, secret, {expiresIn: 20})
 }
 
 module.exports.signToken = signToken;

@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken')
+const secret = process.env.secret || 'thesecret'
 
 function getToken() {
     return localStorage.getItem('token');
@@ -18,7 +19,19 @@ function removeToken() {
     // delete axios headers
 }
 
+function isValid() {
+    try {
+    jwt.verify(this.getToken(), secret)
+    }
+    catch {
+        return false;
+    }
+
+    return true;
+}
+
 module.exports.getToken = getToken;
 module.exports.setToken = setToken;
 module.exports.getCurrentUser = getCurrentUser;
 module.exports.removeToken = removeToken;
+module.exports.isValid = isValid;

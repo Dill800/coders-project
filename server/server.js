@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const path = require('path')
 
 const userRouter = require('./routes/userRouter')
+const weatherRouter = require('./routes/weatherRouter')
  
 // Use env port or default
 const port = process.env.PORT || 5000;
@@ -16,6 +17,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/users', userRouter);
+app.use('/weather', weatherRouter)
 
 // heroku deploy first priority, then take config file
 mongoose.connect(process.env.MONGODB_URI || require('./config/config').db.uri, {useNewUrlParser: true, useUnifiedTopology: true}, () => {

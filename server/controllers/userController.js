@@ -11,7 +11,7 @@ module.exports = {
                 console.log(err);
                 res.send();
             }
-
+            
             if(!user) {
                 res.send({success: 0, message: "Email Doesn't Exist"});
                 return;

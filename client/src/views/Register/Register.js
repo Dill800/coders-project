@@ -25,6 +25,10 @@ const Register = (props) => {
           if(response.data.success === 0) {
             window.alert(response.data.message);
           }
+          else {
+            console.log(response.data)
+            props.history.push('/')
+          }
         }).catch(err => {
           console.log(err);
         })

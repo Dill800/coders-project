@@ -3,6 +3,7 @@ import {Button, Container, Col, Row, Alert, Form, Grid, Jumbotron, Modal} from '
 import './Landing.css'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+const tokenManager = require('../../tokenManager')
 
 const Landing = (props) => {
 
@@ -25,7 +26,18 @@ const Landing = (props) => {
         }).then(response => {
             console.log(response.data)
             if(response.data.success === 1) {
+
+                // Successful Login
+                const token = response.data.token;
+                axios.defaults.headers.common.token = token;
+                tokenManager.setToken(token);
+
+                console.log(tokenManager.getCurrentUser())
+
+                props.setCurrUser(tokenManager.getCurrentUser())
+
                 props.history.push('/Home')
+
             }
             else {
                 setErrMsg(response.data.message);

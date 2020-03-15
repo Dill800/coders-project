@@ -3,6 +3,6 @@ const weatherRouter = new express.Router()
 const weatherController = require('../controllers/weatherController')
 
 // Creating a new account
-weatherRouter.get('/', weatherController.getWeather)
+weatherRouter.get('/', weatherController.getCoordinates, weatherController.getWeather)
 
 module.exports = weatherRouter

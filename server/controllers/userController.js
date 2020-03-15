@@ -1,10 +1,11 @@
 const User = require('../database/UserSchema.js')
+const signToken = require('../authFuncts').signToken;
 
 module.exports = {
 
-    authenticate: async(req, res) => {
+    authenticate: async (req, res) => {
 
-        User.findOne({email: req.body.username}, (err, user) => {
+        const user = await User.findOne({email: req.body.username}, (err, user) => {
 
             if(err) {
                 console.log(err);
@@ -19,11 +20,13 @@ module.exports = {
             if(!user.checkPassword(req.body.pw)) {
                 res.send({success: 0, message: "Invalid Password"});
             }
-            else {
-                res.send({success: 1, message: "Logged in"});
-            }
+
 
         })
+
+        const token = await signToken(user)
+
+        res.send({success: 1, message: "logged in with token", token})
 
     },
 
@@ -41,16 +44,19 @@ module.exports = {
             }
 
         });
-        
+         
     },
 
     create: async (req, res) => {
         console.log("Creating account...")
+
         try {
             User.create(req.body);
+            
+            res.send({success: 1, message: "user created"})
         }
         catch (err) {
-            alert(err)
+            console.log(err)
         }
     }
 }

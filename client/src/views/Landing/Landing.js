@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Button, Container, Col, Row, Alert, Form, Grid, Jumbotron} from 'react-bootstrap'
+import {Button, Container, Col, Row, Alert, Form, Grid, Jumbotron, Modal} from 'react-bootstrap'
 import './Landing.css'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -8,17 +8,31 @@ const Landing = (props) => {
 
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
+    const [errShow, setErrShow] = useState(false);
+    const [errMsg, setErrMsg] = useState('')
 
+    function close() {
+        setErrShow(false);
+    }
+
+    // Logging in
     const submit = (event) => {
         event.preventDefault();
-        console.log('email: ' + email);
-        // request to server
-        axios.post('/login/', {
+        
+        axios.post('/users/login', {
             username: email,
             pw: pass
         }).then(response => {
-            console.log(response)
+            console.log(response.data)
+            if(response.data.success === 1) {
+                props.history.push('/Home')
+            }
+            else {
+                setErrMsg(response.data.message);
+                setErrShow(true)
+            }
         })
+
     }
 
     const onEmailChange = (event) => {
@@ -36,7 +50,6 @@ const Landing = (props) => {
 
             <div className='landing-title-container'>
             <h1 className='landing-title'>Sign In</h1>
-            
             </div>
 
             <Form onSubmit={submit}>
@@ -63,6 +76,16 @@ const Landing = (props) => {
             <div className='create-account-container'>
                 <Link to='/register'>Register</Link>
             </div>
+
+            <Modal show={errShow} onHide={close}>
+                <Modal.Body>
+                    {errMsg}
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={close}>Close</Button>
+                </Modal.Footer>
+            </Modal>
+            
 
         </Container>
     )

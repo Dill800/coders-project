@@ -13,17 +13,19 @@ const Register = (props) => {
     
     const submit = (event) => {
         event.preventDefault();
-        axios.post('/login/new/', {
+        axios.post('/users', {
 
           email: email,
-          pw: pass,
+          passwordHash: pass,
           city: city,
-          state: state
+          state: state,
+          accessLevel: 0
 
         }).then(response => {
-            console.log(response.status)
+          if(response.data.success === 0) {
+            window.alert(response.data.message);
+          }
         }).catch(err => {
-          window.alert("Account already exists!");
           console.log(err);
         })
     }
@@ -77,7 +79,7 @@ const Register = (props) => {
 <Form.Row>
     <Form.Group as={Col} controlId="formGridState">
       <Form.Label>State</Form.Label>
-      <Form.Control as="select" onChange={onStateChange}>
+      <Form.Control required as="select" onChange={onStateChange}>
         <option>Choose...</option>
         <option>Florida</option>
       </Form.Control>

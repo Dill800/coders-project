@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import BarGraph from '../../components/BarGraph/BarGraph'
+import {Spinner} from 'react-bootstrap'
 import { Redirect } from 'react-router-dom';
 import {
 	Navbar,
@@ -17,9 +19,35 @@ const tokenManager = require('../../tokenManager')
 
 const Dashboard = props => {
 
+	const [data, setData] = useState([{
+		city: 'home city',
+		weather: 'fair',
+		accidents: 34
+	}])
+
+	const [loading, setLoading] = useState(true);
+
 	useEffect(() => {
 		console.log('effecrt used')
 	})
+
+	function addData() {
+		setData([...data, 
+		{
+			city: 'andre sauce',
+			weather: 'good',
+			accidents: 88
+		}])
+		setLoading(false) 
+	}
+
+	function revertData() {
+		setData([{
+			city: 'home city',
+			weather: 'fair',
+			accidents: 34
+		}])
+	}
 
 	// If not signed in or old token, redirect to login
     if(!props.currUser || !tokenManager.isValid()) {
@@ -27,6 +55,8 @@ const Dashboard = props => {
             <Redirect to='/'></Redirect>
         )
 	}
+
+	console.log('dashboard interacted with')
 	
 	function logOut() {
 		tokenManager.removeToken();
@@ -35,6 +65,12 @@ const Dashboard = props => {
 	}
 
 	return (
+		<div>
+		{loading ? <Spinner animation="grow" variant="primary"></Spinner> : <BarGraph data={data}/>}
+		<button onClick={addData}>Add</button>
+		<button onClick={revertData}>Revert</button>
+		</div>
+		/*
 		<div>
 			<Container fluid>
 				<Navbar bg='light' expand='lg'>
@@ -359,6 +395,7 @@ const Dashboard = props => {
 				</Row>
 			</Container>
 		</div>
+		*/
 	);
 };
 

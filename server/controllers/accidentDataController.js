@@ -9,8 +9,8 @@ module.exports = {
             if(err){
                 res.send({success: 0, message: 'Error while querying accident data.'});
             }
-            if(accident){
-                res.send({success: 1, data: accident});
+            if(accidents){
+                res.send({success: 1, data: accidents});
             }
         })
     },
@@ -21,14 +21,14 @@ module.exports = {
 
     create: async (req, res) => {
         console.log("Creating accident data entry...")
-
-        try {
-            AccidentDataEntry.create(req.body);
-            res.send({success: 1, message: "Data entry created"})
-        }
-        catch (err) {
-            console.log(err)
-            res.send({success: 0 , message: "Error during data entry creation..."})
-        }
+        AccidentDataEntry.create(req.body, (err, entry) => {
+            if(err){
+                console.log(err)
+                res.send({success: 0, message: 'Error while creating data entry...'})
+            }
+            if(entry){
+                res.send({success: 1, message: 'Data entry created', createdData: entry})
+            }
+        });
     },
 }

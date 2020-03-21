@@ -52,7 +52,6 @@ module.exports = {
 
         try {
             User.create(req.body);
-            
             res.send({success: 1, message: "user created"})
         }
         catch (err) {

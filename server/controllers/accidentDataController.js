@@ -16,7 +16,17 @@ module.exports = {
     },
 
     getCountOnDate: async (req, res) => {
-        res.send({message: 'not implemented...'})
+        AccidentDataEntry.find({date: new Date(req.body.date)}, (err, accidents) => {
+            if(err){
+                res.send({success: 0, message: 'Error while querying accident data.'});
+            }
+            if(accidents){
+                // sum up all the accidents
+                let accident_counts = accidents.map(acc_entry => acc_entry.accidents);
+                let accident_count = accident_counts.reduce((a, b) => a + b, 0);
+                res.send({success: 1, data: accident_count});
+            }
+        })
     },
 
     create: async (req, res) => {

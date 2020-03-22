@@ -5,6 +5,7 @@ import Landing from "./views/Landing/Landing";
 import Register from "./views/Register/Register";
 import NotFound from "./views/NotFound";
 import Forgot from "./views/Forgot/Forgot";
+import Quiz from "./views/Quiz/Quiz";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -16,6 +17,7 @@ const App = () => {
         <Route exact path="/" component={Landing}/>
         <Route exact path="/register" component={Register}/>
         <Route exact path="/forgot-password" component={Forgot}/>
+        <Route exact path="/quiz" component={Quiz}/>
         <Route component={NotFound}/>
       </Switch>
     </div>

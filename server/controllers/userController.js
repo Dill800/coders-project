@@ -49,13 +49,15 @@ module.exports = {
 
     create: async (req, res) => {
         console.log("Creating account...")
+            User.create(req.body, (err, entry) =>{
+                if(err){
+                    console.log(err);
+                    res.send({success: 0, message: "Error during user creation..."})
+                }
+                if(entry){
+                    res.send({success: 1, message: "user created", createdData: entry.email})
+                }
+            })
 
-        try {
-            User.create(req.body);
-            res.send({success: 1, message: "user created"})
-        }
-        catch (err) {
-            console.log(err)
-        }
     }
 }

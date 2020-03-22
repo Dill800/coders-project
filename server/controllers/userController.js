@@ -58,5 +58,6 @@ module.exports = {
                     res.send({success: 1, message: "user created", createdData: entry.email})
                 }
             })
+
     }
 }

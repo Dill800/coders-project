@@ -14,7 +14,7 @@ const quizQuestionSchema = new mongoose.Schema({
 // Method to check for correct answer
 quizQuestionSchema.methods = {
     checkAnswer : function(answerChoiceKey){
-        return answerChoiceKey == correctAnswerKey;
+        return answerChoiceKey == this.correctAnswerKey;
     }
 }
 

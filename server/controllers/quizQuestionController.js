@@ -13,5 +13,13 @@ module.exports = {
             }
             
         })
+    },
+
+    checkQuizAnswer : async (req, res) => {
+        const question = await quizQuestionCollection.findOne({questionID: req.body.questionID}, (err, questionData) => {
+            if(question.checkAnswer(req.body.quizAnswerKey)){
+                res.send({success : 1, correctAnswer : true});
+            }
+        })
     }
 }

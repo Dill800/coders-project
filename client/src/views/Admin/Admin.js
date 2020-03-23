@@ -76,7 +76,7 @@ const Admin = (props) => {
 <Form.Row>
     <Form.Group as={Col} controlId="formGridCity">
       <Form.Label>Number of Accidents</Form.Label>
-      <Form.Control onChange={onAccidentsChange} required type="number" placeholder="# of Accidents" />
+      <Form.Control onChange={onAccidentsChange} required type="number" placeholder="Number of Accidents" />
     </Form.Group>
 </Form.Row>
 

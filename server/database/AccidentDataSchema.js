@@ -7,4 +7,5 @@ const accidentDataSchema = new mongoose.Schema({
 });
 
 var accidentData = mongoose.model(collectionName, accidentDataSchema);
+
 module.exports = accidentData

@@ -1,0 +1,18 @@
+.quiz-container {
+    text-align: center;
+    padding: 2% 0px 20px 0px;
+    font-size: 25px;
+}
+
+.btn:focus{
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.wrongAns{
+    color: red !important;
+}
+
+.btn-block:focus{
+    background:rgb(190, 190, 190);
+}

@@ -32,10 +32,11 @@ const Dashboard = props => {
 		'Las Vegas',
 		'New York',
 		'Gainesville',
+		'St. Pete',
 	];
 
 	const [startDate, setStartDate] = useState(new Date());
-	const [selectedCities, setSelectedCities] = useState(['Tampa']);
+	const [selectedCities, setSelectedCities] = useState([]);
 
 	/**
 	 * End Filter Information
@@ -50,6 +51,11 @@ const Dashboard = props => {
 		tokenManager.removeToken();
 		props.setCurrUser(null);
 		props.history.push('/login');
+	}
+
+	function applyFilters() {
+		console.log(startDate);
+		console.log(selectedCities);
 	}
 
 	return (
@@ -93,6 +99,9 @@ const Dashboard = props => {
 							selectedCities={selectedCities}
 							setSelectedCities={setSelectedCities}
 						/>
+						<Button variant='primary' onClick={applyFilters}>
+							Set Filters
+						</Button>{' '}
 					</Col>
 					<Col md={8}>
 						<h4>Accident Information</h4>

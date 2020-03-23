@@ -12,33 +12,53 @@ import {
 	Button,
 } from 'react-bootstrap';
 import './Dashboard.css';
+import Filters from './Filters';
 
-const tokenManager = require('../../tokenManager')
+const tokenManager = require('../../tokenManager');
 
 const Dashboard = props => {
-
 	useEffect(() => {
-		console.log('effecrt used')
-	})
+		console.log('effecrt used');
+	});
+
+	/**
+	 * Begin Filter Information
+	 */
+	const cities = [
+		'Tampa',
+		'Orlando',
+		'Atlanta',
+		'Austin',
+		'Las Vegas',
+		'New York',
+		'Gainesville',
+	];
+
+	const [startDate, setStartDate] = useState(new Date());
+	const [selectedCities, setSelectedCities] = useState(['Tampa']);
+
+	/**
+	 * End Filter Information
+	 */
 
 	// If not signed in or old token, redirect to login
-    if(!props.currUser || !tokenManager.isValid()) {
-        return(
-            <Redirect to='/'></Redirect>
-        )
+	if (!props.currUser || !tokenManager.isValid()) {
+		return <Redirect to='/'></Redirect>;
 	}
-	
+
 	function logOut() {
 		tokenManager.removeToken();
 		props.setCurrUser(null);
-		props.history.push('/login')
+		props.history.push('/login');
 	}
 
 	return (
 		<div>
 			<Container fluid>
 				<Navbar bg='light' expand='lg'>
-					<Navbar.Brand href='/Dashboard'>Welcome, {props.currUser.email}</Navbar.Brand>
+					<Navbar.Brand href='/Dashboard'>
+						Welcome, {props.currUser.email}
+					</Navbar.Brand>
 					<Navbar.Toggle aria-controls='basic-navbar-nav' />
 					<Navbar.Collapse id='basic-navbar-nav'>
 						<Nav className='ml-auto'>
@@ -50,7 +70,7 @@ const Dashboard = props => {
 									Quizzes
 								</NavDropdown.Item>
 								<NavDropdown.Divider />
-								<NavDropdown.Item onClick = {logOut} href='#'>
+								<NavDropdown.Item onClick={logOut} href='#'>
 									Logout
 								</NavDropdown.Item>
 							</NavDropdown>
@@ -66,7 +86,13 @@ const Dashboard = props => {
 				</Row>
 				<Row>
 					<Col md={2}>
-						<h4>Select Date</h4>
+						<Filters
+							startDate={startDate}
+							setStartDate={setStartDate}
+							cities={cities}
+							selectedCities={selectedCities}
+							setSelectedCities={setSelectedCities}
+						/>
 					</Col>
 					<Col md={8}>
 						<h4>Accident Information</h4>
@@ -306,56 +332,6 @@ const Dashboard = props => {
 							</tbody>
 						</Table>
 					</Col>
-				</Row>
-				<Row>
-					<Col>
-						<h3>Cities</h3>
-					</Col>
-				</Row>
-				<Row>
-					<Col>
-						<Card style={{ width: '18rem' }}>
-							<Card.Img
-								variant='top'
-								src='https://via.placeholder.com/180x100.png?text=Tampa'
-							/>
-						</Card>
-					</Col>
-					<Col>
-						<Card style={{ width: '18rem' }}>
-							<Card.Img
-								variant='top'
-								src='https://via.placeholder.com/180x100.png?text=Atlanta'
-							/>
-						</Card>
-					</Col>
-					<Col>
-						<Card style={{ width: '18rem' }}>
-							<Card.Img
-								variant='top'
-								src='https://via.placeholder.com/180x100.png?text=Austin'
-							/>
-						</Card>
-					</Col>
-					<Col>
-						<Card style={{ width: '18rem' }}>
-							<Card.Img
-								variant='top'
-								src='https://via.placeholder.com/180x100.png?text=Chicago'
-							/>
-						</Card>
-					</Col>
-					<Col>
-						<Card style={{ width: '18rem' }}>
-							<Card.Img
-								variant='top'
-								src='https://via.placeholder.com/180x100.png?text=Detroit'
-							/>
-						</Card>
-					</Col>
-				</Row>
-				<Row>
-					<Col>&nbsp;</Col>
 				</Row>
 			</Container>
 		</div>

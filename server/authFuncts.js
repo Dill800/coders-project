@@ -8,4 +8,5 @@ function signToken(user) {
     return jwt.sign(userData, secret, {expiresIn: 1400})
 }
 
+
 module.exports.signToken = signToken;

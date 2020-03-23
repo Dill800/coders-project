@@ -1,3 +1,4 @@
+
 const AccidentDataEntry = require('../database/AccidentDataSchema.js')
 //const signToken = require('../authFuncts').signToken;
 
@@ -41,4 +42,5 @@ module.exports = {
             }
         });
     },
+
 }

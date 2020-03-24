@@ -7,8 +7,15 @@ module.exports = {
 
         // /key/lat/long/2018-10-24T19:06:32
 
-        let result = await axios.get('https://api.darksky.net/forecast/' + config.darkSkyApiKey + '/' + req.latitude + ',' + req.longitude + ',2020-03-01T19:06:32')
+        let result = await axios.get('https://api.darksky.net/forecast/' + config.darkSkyApiKey + '/' + req.latitude + ',' + req.longitude + ',' + req.query.date + 'T12:06:32')
 
+        res.send({
+            city: req.query.city,
+            weather: result.data.currently.summary,
+            accidents: req.accidents
+        })
+
+        /*
         res.send({
             latitude: result.data.latitude,
             longitude: result.data.longitude,
@@ -16,6 +23,7 @@ module.exports = {
             precipProbability: result.data.currently.precipProbability,
             weather: result.data.currently.precipType
         })
+        */
 
     },
 

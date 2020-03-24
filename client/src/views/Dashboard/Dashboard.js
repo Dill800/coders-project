@@ -12,14 +12,17 @@ import {
 	Button,
 } from 'react-bootstrap';
 import './Dashboard.css';
+import axios from 'axios'
+import Filters from '../../components/Header/Filters/Filters'
+import DataVis from '../../components/DataVis/DataVis'
 
 const tokenManager = require('../../tokenManager')
 
 const Dashboard = props => {
 
-	useEffect(() => {
-		console.log('effecrt used')
-	})
+	const [cities, setCities] = useState({})
+	const [date, setDate] = useState('')
+	const [data, setData] = useState([])
 
 	// If not signed in or old token, redirect to login
     if(!props.currUser || !tokenManager.isValid()) {
@@ -34,11 +37,39 @@ const Dashboard = props => {
 		props.history.push('/login')
 	}
 
+	//let cities = ['Royal Palm Beach', 'Gainesville', 'Jupiter']
+	//let date = '2020-02-02'
+
+	
+
+	function buttonClicked() {
+
+		let chartData = [];
+
+		let calls = [];
+		cities.forEach((val, ind) => {
+			calls.push(axios.get('/accidentData/totalInfo/?date=' + date + '&city=' + val + '&state=Florida'))
+		})
+
+		axios.all(calls)
+		.then(
+			axios.spread((...responses) => {
+				responses.map(response => {
+					chartData.push(response.data)
+				})
+
+				setData(chartData)
+			})
+		)
+
+	}
+
 	return (
 		<div>
 			<Container fluid>
 				<Navbar bg='light' expand='lg'>
 					<Navbar.Brand href='/Dashboard'>Welcome, {props.currUser.email}</Navbar.Brand>
+					<button onClick={buttonClicked}>Test</button>
 					<Navbar.Toggle aria-controls='basic-navbar-nav' />
 					<Navbar.Collapse id='basic-navbar-nav'>
 						<Nav className='ml-auto'>
@@ -65,298 +96,19 @@ const Dashboard = props => {
 					</Col>
 				</Row>
 				<Row>
-					<Col md={2}>
+					<Col md={3}>
 						<h4>Select Date</h4>
+						<Row>
+							<Filters setCities={setCities} setDate={setDate}/>
+						</Row>
 					</Col>
-					<Col md={8}>
+					<Col md={9}>
 						<h4>Accident Information</h4>
-						<Table striped bordered hover>
-							<thead>
-								<tr>
-									<th>Time</th>
-									<th>Address</th>
-									<th>Report Details</th>
-									<th>Number of Drivers Involved</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-							</tbody>
-						</Table>
-					</Col>
-					<Col md={2}>
-						<h4>Hourly Weather</h4>
-						<Table striped bordered hover>
-							<thead>
-								<tr>
-									<th>Hour</th>
-									<th>Weather</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-							</tbody>
-						</Table>
+						<DataVis data={data}/>
 					</Col>
 				</Row>
-				<Row>
-					<Col>
-						<h3>Cities</h3>
-					</Col>
-				</Row>
-				<Row>
-					<Col>
-						<Card style={{ width: '18rem' }}>
-							<Card.Img
-								variant='top'
-								src='https://via.placeholder.com/180x100.png?text=Tampa'
-							/>
-						</Card>
-					</Col>
-					<Col>
-						<Card style={{ width: '18rem' }}>
-							<Card.Img
-								variant='top'
-								src='https://via.placeholder.com/180x100.png?text=Atlanta'
-							/>
-						</Card>
-					</Col>
-					<Col>
-						<Card style={{ width: '18rem' }}>
-							<Card.Img
-								variant='top'
-								src='https://via.placeholder.com/180x100.png?text=Austin'
-							/>
-						</Card>
-					</Col>
-					<Col>
-						<Card style={{ width: '18rem' }}>
-							<Card.Img
-								variant='top'
-								src='https://via.placeholder.com/180x100.png?text=Chicago'
-							/>
-						</Card>
-					</Col>
-					<Col>
-						<Card style={{ width: '18rem' }}>
-							<Card.Img
-								variant='top'
-								src='https://via.placeholder.com/180x100.png?text=Detroit'
-							/>
-						</Card>
-					</Col>
-				</Row>
-				<Row>
-					<Col>&nbsp;</Col>
-				</Row>
+				
+				
 			</Container>
 		</div>
 	);

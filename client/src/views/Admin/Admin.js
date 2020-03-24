@@ -12,20 +12,12 @@ const Admin = (props) => {
     const [accidents, setAccidents] = useState('');
 
     const submit = (event) => {
-        event.preventDefault();
-        axios.post('/login/new/', {
+      event.preventDefault();
+      console.log('State', state)
+      console.log('Date', date)
+      console.log('City', city)
+      console.log('Accidents', accidents)
 
-          state: state,
-          city: city,
-          date: date,
-          accidents, accidents,
-
-        }).then(response => {
-            console.log(response.status)
-        }).catch(err => {
-          window.alert("Error");
-          console.log(err);
-        })
     }
 
     const onStateChange = (event) => {

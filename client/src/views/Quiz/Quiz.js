@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Container, Col, Row,} from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import './Quiz.css'
+import axios from 'axios'
 
 const Quiz = (props) => {
     const [answerChoice, setChoice] = useState(0);
@@ -10,8 +11,25 @@ const Quiz = (props) => {
     const [wrong2, setWrong2] = useState(false);
     const [wrong3, setWrong3] = useState(false);
     const [wrong4, setWrong4] = useState(false);
-    const questions = require('./questions.json');
-    var count = 3;
+    const [questions, setQuestions] = useState(null);
+    const [isLoading, setLoading] = useState(true)
+
+    // fetch quiz questions
+    useEffect(() => {
+        axios.get('/questionData')
+    .then(response => {
+        setQuestions(response.data)
+        setLoading(false)
+    })
+    }, [isLoading])
+
+    // if loading return loading screen
+    if(isLoading) return <p>Loading</p>
+
+    let count = 0;
+    if(questions !== null) {
+        count = questions.data.length
+    }
 
     const answer1 = () => {
         setChoice(1);
@@ -27,7 +45,7 @@ const Quiz = (props) => {
     };
 
     const submitAns = () => {
-        if(answerChoice !== 0 && questionNum < count - 1 && answerChoice === answer){
+        if(answerChoice !== 0 && questionNum < count - 1 && answerChoice === questions.data[questionNum].answer){
             setChoice(0);
             setQuestion(questionNum + 1);
             setWrong1(false);
@@ -35,7 +53,7 @@ const Quiz = (props) => {
             setWrong3(false);
             setWrong4(false);
         }
-        if(answerChoice !== 0 && questionNum === count - 1 && answerChoice === answer){
+        if(answerChoice !== 0 && questionNum === count - 1 && answerChoice === questions.data[questionNum].answer){
             setChoice(0);
             setQuestion(0);
             setWrong1(false);
@@ -43,7 +61,7 @@ const Quiz = (props) => {
             setWrong3(false);
             setWrong4(false);
         }
-        if(answerChoice !== answer){
+        if(answerChoice !== questions.data[questionNum].answer){
             switch (answerChoice){
                 case 1:
                     setWrong1(true);
@@ -64,21 +82,14 @@ const Quiz = (props) => {
         }
     }
 
-    let question = questions.questions[questionNum].question;
-    let choice1 = questions.questions[questionNum].choices[0];
-    let choice2 = questions.questions[questionNum].choices[1];
-    let choice3 = questions.questions[questionNum].choices[2];
-    let choice4 = questions.questions[questionNum].choices[3];
-    let answer = questions.questions[questionNum].answer;
-
     return (
         <div>
             <Container className='quiz-container'>
-                <div><p className='question'>{question}</p></div>
-                <div><button className={wrong1 ? 'btn btn-default btn-lg btn-block wrongAns' : 'btn btn-default btn-lg btn-block'} onClick={answer1}>{choice1}</button></div>
-                <div><button className={wrong2 ? 'btn btn-default btn-lg btn-block wrongAns' : 'btn btn-default btn-lg btn-block'} onClick={answer2}>{choice2}</button></div>
-                <div><button className={wrong3 ? 'btn btn-default btn-lg btn-block wrongAns' : 'btn btn-default btn-lg btn-block'} onClick={answer3}>{choice3}</button></div>
-                <div><button className={wrong4 ? 'btn btn-default btn-lg btn-block wrongAns' : 'btn btn-default btn-lg btn-block'} onClick={answer4}>{choice4}</button></div>
+                <div><p className='question'>{questions.data[questionNum].question}</p></div>
+                <div><button className={wrong1 ? 'btn btn-default btn-lg btn-block wrongAns' : 'btn btn-default btn-lg btn-block'} onClick={answer1}>{questions.data[questionNum].choices[0]}</button></div>
+                <div><button className={wrong2 ? 'btn btn-default btn-lg btn-block wrongAns' : 'btn btn-default btn-lg btn-block'} onClick={answer2}>{questions.data[questionNum].choices[1]}</button></div>
+                <div><button className={wrong3 ? 'btn btn-default btn-lg btn-block wrongAns' : 'btn btn-default btn-lg btn-block'} onClick={answer3}>{questions.data[questionNum].choices[2]}</button></div>
+                <div><button className={wrong4 ? 'btn btn-default btn-lg btn-block wrongAns' : 'btn btn-default btn-lg btn-block'} onClick={answer4}>{questions.data[questionNum].choices[3]}</button></div>
                 <Row>
                     <Col>
                     <Link to='/dashboard'>

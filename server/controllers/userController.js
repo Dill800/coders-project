@@ -5,7 +5,7 @@ module.exports = {
 
     authenticate: async (req, res) => {
 
-        const user = await User.findOne({email: req.body.username}, (err, user) => {
+        User.findOne({email: req.body.username}, (err, user) => {
 
             if(err) {
                 console.log(err);
@@ -17,16 +17,19 @@ module.exports = {
                 return;
             }
 
-            if(!user.checkPassword(req.body.pw)) {
+            else if(!user.checkPassword(req.body.pw)) {
                 res.send({success: 0, message: "Invalid Password"});
             }
 
+            else {
+                const token = signToken(user)
+
+                res.send({success: 1, message: "logged in with token", token})
+            }
 
         })
 
-        const token = await signToken(user)
-
-        res.send({success: 1, message: "logged in with token", token})
+        
 
     },
 

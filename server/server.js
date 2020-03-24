@@ -7,19 +7,24 @@ const path = require('path')
 const userRouter = require('./routes/userRouter')
 const weatherRouter = require('./routes/weatherRouter')
 const accidentDataRouter = require('./routes/accidentDataRouter')
- 
+const questionRouter = require('./routes/quizPageRouter') 
+
 // Use env port or default
 const port = process.env.PORT || 5000;
 
 // Using libraries
 const app = express();
 app.use(morgan('dev'));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json())
 
 // Routes
 app.use('/users', userRouter);
 app.use('/weather', weatherRouter)
 app.use('/accidentData', accidentDataRouter)
+app.use('/questionData', questionRouter)
 
 // heroku deploy first priority, then take config file
 mongoose.connect(process.env.MONGODB_URI || require('./config/config').db.uri, {useNewUrlParser: true, useUnifiedTopology: true}, () => {

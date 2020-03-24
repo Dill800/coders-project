@@ -1,14 +1,13 @@
 const mongoose = require('mongoose')
 
-const collectionName = 'quizQuestionData'
+const collectionName = 'quiz'
 const quizQuestionSchema = new mongoose.Schema({
-    questionID : {type : String, required: true},
-    questionText : {type: String, required: true},
+    question : {type: String, required: true},
     
     // Storing answer choices in a Map instead of array to check correct answer easier
     // Mongoose Map keys are always strings
-    answerChoices : {type : Map, of : String}, required : true,
-    correctAnswerKey : {type: String, required: true},
+    choices : {type : Array, of : String, required : true},
+    answer : {type: mongoose.Number, required: true},
 });
 
 // Method to check for correct answer
@@ -18,5 +17,5 @@ quizQuestionSchema.methods = {
     }
 }
 
-var quizQuestionCollection = mongoose.model(collectionName, quizQuestionSchema);
+var quizQuestionCollection = mongoose.model(collectionName, quizQuestionSchema, 'quiz');
 module.exports = quizQuestionCollection;

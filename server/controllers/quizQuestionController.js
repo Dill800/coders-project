@@ -2,24 +2,28 @@ const quizQuestionCollection = require('../database/QuizQuestionSchema')
 
 module.exports = {
 
-    getQuizQuestionByID : async (req, res) => {
-        quizQuestionCollection.findOne({questionID: req.body.questionID}, (err, questionData) => {
-            if(questionData){
-                res.send({success: 1, data: questionData});
+    getQuizQuestions : async (req, res) => {
+        quizQuestionCollection.find({}, (err, questionData) => {
+            console.log('question data')
+            console.log(questionData)
+            if(err) {
+                res.send({success: 0, message: "there was an error"});
             }
-            if(err){
-                res.send({success: 0 , message: "ERROR: Couldn't not retreive question with ID: " + 
-                req.body.questionID + " from the database"});
-            }
-            
+
+            res.send({success: 1, data: questionData})
         })
     },
 
-    checkQuizAnswer : async (req, res) => {
-        const question = await quizQuestionCollection.findOne({questionID: req.body.questionID}, (err, questionData) => {
-            if(question.checkAnswer(req.body.quizAnswerKey)){
-                res.send({success : 1, correctAnswer : true});
+    create: async (req, res) => {
+        quizQuestionCollection.create(req.body, (err, entry) => {
+
+            if(err){
+                console.log(err)
+                res.send({success: 0, message: 'Error while creating data entry...'})
             }
-        })
+            if(entry){
+                res.send({success: 1, message: 'Data entry created', createdData: entry})
+            }
+        });
     }
 }

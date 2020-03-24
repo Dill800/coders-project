@@ -6,8 +6,22 @@ module.exports = {
 
     get: async (req, res) => {
         // find all accidents on given date
-        AccidentDataEntry.find({date: new Date(req.body.date)}, (err, accidents) => {
+        AccidentDataEntry.find({date: req.query.date}, (err, accidents) => {
             if(err){
+                console.log(err)
+                res.send({success: 0, message: 'Error while querying accident data.'});
+            }
+            if(accidents){
+                res.send({success: 1, data: accidents});
+            }
+        })
+    },
+
+    getAll: async (req, res) => {
+        // find all accidents on given date
+        AccidentDataEntry.find({}, (err, accidents) => {
+            if(err){
+                console.log(err)
                 res.send({success: 0, message: 'Error while querying accident data.'});
             }
             if(accidents){
@@ -17,7 +31,7 @@ module.exports = {
     },
 
     getCountOnDate: async (req, res) => {
-        AccidentDataEntry.find({date: new Date(req.body.date)}, (err, accidents) => {
+        AccidentDataEntry.find({date: req.query.date}, (err, accidents) => {
             if(err){
                 res.send({success: 0, message: 'Error while querying accident data.'});
             }
@@ -33,6 +47,9 @@ module.exports = {
     create: async (req, res) => {
         console.log("Creating accident data entry...")
         AccidentDataEntry.create(req.body, (err, entry) => {
+            console.log('ooarams', req.query)
+            console.log('body', req.body)
+
             if(err){
                 console.log(err)
                 res.send({success: 0, message: 'Error while creating data entry...'})

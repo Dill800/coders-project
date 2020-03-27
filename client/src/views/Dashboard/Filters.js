@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'; // https://reactdatepicker.com/
 import Select from 'react-select'; // https://react-select.com/home
 
@@ -17,7 +16,6 @@ import {
 } from 'react-bootstrap';
 
 const Filters = props => {
-
 	let cityOptions = props.cities;
 
 	if (props.selectedCities.length == 4) {
@@ -39,10 +37,19 @@ const Filters = props => {
 					<h4>Select Date</h4>
 				</Row>
 				<Row>
-					<DatePicker
-						selected={props.startDate}
-						onChange={date => props.setStartDate(date)}
-					/>
+					<Form>
+						<Form.Group>
+							<Form.Label>Date</Form.Label>
+							<Form.Control
+								onChange={event =>
+									props.setDate(event.target.value)
+								}
+								required
+								type='Date'
+								placeholder='mm/dd/yyyy'
+							/>
+						</Form.Group>
+					</Form>
 				</Row>
 				<Row>&nbsp;</Row>
 				<Row>
@@ -53,7 +60,7 @@ const Filters = props => {
 						options={cityOptions}
 						isMulti
 						className='col-8'
-						onChange={(inputValue) => setLocations(inputValue)}
+						onChange={inputValue => setLocations(inputValue)}
 					/>
 				</Row>
 				<Row>&nbsp;</Row>

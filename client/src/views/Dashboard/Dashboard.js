@@ -36,7 +36,7 @@ const Dashboard = props => {
 		{ value: 'St. Pete', label: 'St. Pete, FL' },
 	];
 
-	const [startDate, setStartDate] = useState(new Date());
+	const [date, setDate] = useState('');
 	const [selectedCities, setSelectedCities] = useState([]);
 
 	/**
@@ -68,7 +68,7 @@ const Dashboard = props => {
 	}
 
 	function applyFilters() {
-		console.log(startDate);
+		console.log(date);
 		console.log(selectedCities);
 	}
 
@@ -105,8 +105,8 @@ const Dashboard = props => {
 				<Row>
 					<Col md={2}>
 						<Filters
-							startDate={startDate}
-							setStartDate={setStartDate}
+							date={date}
+							setDate={setDate}
 							cities={cities}
 							selectedCities={selectedCities}
 							setSelectedCities={setSelectedCities}

@@ -13,6 +13,7 @@ import {
 } from 'react-bootstrap';
 import './Dashboard.css';
 import Filters from './Filters';
+import WeatherDisplay from './WeatherDisplay';
 
 const tokenManager = require('../../tokenManager');
 
@@ -40,6 +41,19 @@ const Dashboard = props => {
 
 	/**
 	 * End Filter Information
+	 */
+
+	/**
+	 * Begin Weather Information ******* Component will loop through ALL cities and associated weather value or weather data we choose to incorperate
+	 */
+	const weather = [
+		{ location: 'Tampa', value: 'Sunny' },
+		{ location: 'Orlando', value: 'Raining' },
+		{ location: 'Atlanta', value: 'Snowing' },
+		{ location: 'Austin', value: 'Cloudy' },
+	]
+	/**
+	 * End Weather Information
 	 */
 
 	// If not signed in or old token, redirect to login
@@ -112,6 +126,7 @@ const Dashboard = props => {
 					</Col>
 					<Col md={2}>
 						<h4>Weather</h4>
+						<WeatherDisplay weather={weather} />
 					</Col>
 				</Row>
 			</Container>

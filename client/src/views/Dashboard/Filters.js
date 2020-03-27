@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import Select from 'react-select';
+import 'react-datepicker/dist/react-datepicker.css'; // https://reactdatepicker.com/
+import Select from 'react-select'; // https://react-select.com/home
 
 import {
 	Navbar,

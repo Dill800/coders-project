@@ -23,9 +23,15 @@ const Filters = props => {
 	}
 
 	function setLocations(inputValue) {
+
+		if(inputValue === null) {
+			props.setSelectedCities([])
+			return
+		}
+
 		let selectedLocations = [];
 		for (let i = 0; i < inputValue.length; i++) {
-			selectedLocations.push(inputValue[i].value);
+			selectedLocations.push({city: inputValue[i].city, state: inputValue[i].state});
 		}
 		props.setSelectedCities(selectedLocations);
 	}

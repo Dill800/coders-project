@@ -50,7 +50,7 @@ module.exports = {
 
     getCounts: async (req, res, next) => {
 
-        AccidentDataEntry.find({date: req.query.date, city: req.query.city}, (err, accidents) => {
+        AccidentDataEntry.find({date: req.query.date, city: req.query.city, state: req.query.state}, (err, accidents) => {
             if(err){
                 res.send({success: 0, message: 'Error while querying accident data.'});
             }

@@ -13,13 +13,13 @@ import {
 const WeatherDisplay = props => {
 	const weatherCards = [];
 
-	for (let i = 0; i < props.weather.length; i++) {
+	for (let i = 0; i < props.data.length; i++) {
+		console.log(props.data)
 		weatherCards.push(
-			<Card style={{ width: '12rem' }} className='weatherCard'>
-				<Card.Header>{props.weather[i].location}</Card.Header>
+			<Card style={{ width: '100%' }} className='weatherCard'>
 				<Card.Body>
-					<Card.Title>{props.weather[i].value}</Card.Title>
-					<Card.Text>Icon will go here in the future...</Card.Text>
+					<Card.Title>{props.data[i].city}</Card.Title>
+					<Card.Text>{props.data[i].weather}</Card.Text>
 				</Card.Body>
 			</Card>,
 		);

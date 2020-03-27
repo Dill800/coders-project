@@ -12,53 +12,59 @@ import {
 	Button,
 } from 'react-bootstrap';
 import './Dashboard.css';
-
 import Filters from './Filters';
 import WeatherDisplay from './WeatherDisplay';
-
-
+import DataVis from '../../components/DataVis/DataVis'
+import axios from 'axios'
 
 const tokenManager = require('../../tokenManager');
 
 const Dashboard = props => {
 
+	// Load in distinct values on loading of component
+	const [distinctCities, setDistinctCities] = useState([{}])
+
 	useEffect(() => {
-		console.log('effecrt used');
-	});
+		axios.get('/accidentData/distinct')
+		.then(response => {
+			console.log(response.data.data)
+			let inter = [];
+			response.data.data.map(value => {
+				// value must be unique for each entry
+				inter.push({value: value.city + ', ' + value.state, label: value.city + ', ' + value.state, city: value.city, state: value.state})
+			})
+			setDistinctCities(inter);
+	
+		})
+	}, [])
 
 	/**
 	 * Begin Filter Information
 	 */
-	const cities = [
-		{ value: 'tampa', label: 'Tampa, FL' },
-		{ value: 'orlando', label: 'Orlando, FL' },
-		{ value: 'Atlanta', label: 'Atlanta, GA' },
-		{ value: 'Austin', label: 'Austin, TX' },
-		{ value: 'Las Vegas', label: 'Las Vegas, NV' },
-		{ value: 'New York', label: 'New York, NY' },
-		{ value: 'Gainesville', label: 'Gainesville, FL' },
-		{ value: 'St. Pete', label: 'St. Pete, FL' },
-	];
 
+	// filter info
 	const [date, setDate] = useState('');
-	const [selectedCities, setSelectedCities] = useState([]);
+	const [selectedLocations, setSelectedLocations] = useState([]);
 
-	/**
-	 * End Filter Information
-	 */
+	// data (city json)
+	const [data, setData] = useState({});
 
-	/**
-	 * Begin Weather Information ******* Component will loop through ALL cities and associated weather value or weather data we choose to incorperate
-	 */
+	// data is a list of JSON in format:
+	/*
+	{
+		city:
+		state:
+		weather:
+		accidents:
+	}
+	*/
+
 	const weather = [
 		{ location: 'Tampa', value: 'Sunny' },
 		{ location: 'Orlando', value: 'Raining' },
 		{ location: 'Atlanta', value: 'Snowing' },
 		{ location: 'Austin', value: 'Cloudy' },
 	];
-	/**
-	 * End Weather Information
-	 */
 
 	// If not signed in or old token, redirect to login
 	if (!props.currUser || !tokenManager.isValid()) {
@@ -73,31 +79,27 @@ const Dashboard = props => {
 
 	function applyFilters() {
 		console.log(date);
-		console.log(selectedCities);
-	}
+		console.log(selectedLocations);
 
-	//let cities = ['Royal Palm Beach', 'Gainesville', 'Jupiter']
-	//let date = '2020-02-02'
-
-	
-
-	function buttonClicked() {
-
-		let chartData = [];
+		let chartData = []
 
 		let calls = [];
-		cities.forEach((val, ind) => {
-			calls.push(axios.get('/accidentData/totalInfo/?date=' + date + '&city=' + val + '&state=Florida'))
+		selectedLocations.forEach((val, ind) => {
+			let city = val.city;
+			let state = val.state;
+			calls.push(axios.get('/accidentData/totalInfo/?date=' + date + '&city=' + city + '&state=' + state))
 		})
 
 		axios.all(calls)
 		.then(
 			axios.spread((...responses) => {
 				responses.map(response => {
+					console.log(response)
+					console.log(response.data)
 					chartData.push(response.data)
 				})
 
-				setData(chartData)
+				setData(chartData);
 			})
 		)
 
@@ -126,30 +128,7 @@ const Dashboard = props => {
 				</Navbar.Collapse>
 			</Navbar>
 			<Container fluid>
-				<Navbar bg='light' expand='lg'>
-					<Navbar.Brand href='/Dashboard'>Welcome, {props.currUser.email}</Navbar.Brand>
-					<button onClick={buttonClicked}>Test</button>
-					<Navbar.Toggle aria-controls='basic-navbar-nav' />
-					<Navbar.Collapse id='basic-navbar-nav'>
-						<Nav className='ml-auto'>
-							<NavDropdown title='Menu' id='basic-nav-dropdown'>
-								<NavDropdown.Item href='#'>
-									Profile
-								</NavDropdown.Item>
-								<NavDropdown.Item href='#'>
-									Quizzes
-								</NavDropdown.Item>
-								<NavDropdown.Divider />
-								<NavDropdown.Item onClick = {logOut} href='#'>
-									Logout
-								</NavDropdown.Item>
-							</NavDropdown>
-						</Nav>
-					</Navbar.Collapse>
-				</Navbar>
-			</Container>
-			<Container fluid>
-
+				<Row>&nbsp;</Row>
 				<Row>
 					<Col>
 						<h2>Dashboard</h2>
@@ -157,28 +136,27 @@ const Dashboard = props => {
 				</Row>
 				<Row>&nbsp;</Row>
 				<Row>
-
-					<Col md={2}>
+					<Col md={4}>
 						<Filters
 							date={date}
 							setDate={setDate}
-							cities={cities}
-							selectedCities={selectedCities}
-							setSelectedCities={setSelectedCities}
+							cities={distinctCities}
+							selectedCities={selectedLocations}
+							setSelectedCities={setSelectedLocations}
 						/>
 						<Button variant='primary' onClick={applyFilters}>
 							Set Filters
-						</Button>{' '}
+						</Button>
 					</Col>
-					<Col md={8}>
+					<Col md={6}>
 						<h4>Accident Graph</h4>
+						<DataVis data={data}/>
 					</Col>
 					<Col md={2}>
 						<h4>Weather</h4>
-						<WeatherDisplay weather={weather} />
+						<WeatherDisplay data={data} />
 					</Col>
 				</Row>
-
 			</Container>
 		</div>
 	);

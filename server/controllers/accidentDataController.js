@@ -17,6 +17,24 @@ module.exports = {
         })
     },
 
+    getDistinctCities: async (req, res) => {
+
+        let result = await AccidentDataEntry.aggregate(
+            [
+                {"$group": {"_id": {city: "$city", state: "$state"}}}
+            ]
+        )
+        
+        // get rid of _id field
+        let list = [];
+        result.map((value, ind) => {
+            list.push({city: value._id.city, state: value._id.state})
+        }) 
+
+        res.send({success: 1, data: list})
+
+    },
+
     getAll: async (req, res) => {
         // find all accidents on given date
         AccidentDataEntry.find({}, (err, accidents) => {
@@ -52,8 +70,6 @@ module.exports = {
     create: async (req, res) => {
         console.log("Creating accident data entry...")
         AccidentDataEntry.create(req.body, (err, entry) => {
-            console.log('ooarams', req.query)
-            console.log('body', req.body)
 
             if(err){
                 console.log(err)

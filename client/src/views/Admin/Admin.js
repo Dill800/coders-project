@@ -18,6 +18,18 @@ const Admin = (props) => {
       console.log('City', city)
       console.log('Accidents', accidents)
 
+      axios.post('/accidentData',
+      {
+          state: state,
+          date: date,
+          city: city,
+          accidents: accidents
+        }
+      )
+      .then((response) => {
+        console.log(response.message)
+      })
+
     }
 
     const onStateChange = (event) => {
@@ -32,9 +44,6 @@ const Admin = (props) => {
     const onAccidentsChange = (event) => {
         setAccidents(event.target.value);
     }
-
-
-
 
     return (
         <Container>

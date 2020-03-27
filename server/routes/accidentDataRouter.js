@@ -14,4 +14,7 @@ accidentDataRouter.get('/accidentsOnDay', accidentDataController.getCounts)
 // Returns city, accidents, and weather on a particular day
 accidentDataRouter.get('/totalInfo', accidentDataController.getCounts, weatherController.getCoordinates, weatherController.getWeather)
 
+// gets distinct city/state values in database
+accidentDataRouter.get('/distinct', accidentDataController.getDistinctCities)
+
 module.exports = accidentDataRouter

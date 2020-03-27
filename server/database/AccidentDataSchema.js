@@ -4,6 +4,7 @@ const collectionName = 'accidents'
 const accidentDataSchema = new mongoose.Schema({
     date : {type: String, required: true},
     city : {type: String, required: true},
+    state : {type: String, required: true},
     accidents : {type: mongoose.Number, required: true},
 });
 

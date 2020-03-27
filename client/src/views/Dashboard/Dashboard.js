@@ -51,15 +51,15 @@ const Dashboard = props => {
 		{ location: 'Orlando', value: 'Raining' },
 		{ location: 'Atlanta', value: 'Snowing' },
 		{ location: 'Austin', value: 'Cloudy' },
-	]
+	];
 	/**
 	 * End Weather Information
 	 */
 
 	// If not signed in or old token, redirect to login
-	// if (!props.currUser || !tokenManager.isValid()) {
-	// 	return <Redirect to='/'></Redirect>;
-	// }
+	if (!props.currUser || !tokenManager.isValid()) {
+		return <Redirect to='/'></Redirect>;
+	}
 
 	function logOut() {
 		tokenManager.removeToken();
@@ -75,39 +75,33 @@ const Dashboard = props => {
 	return (
 		<div>
 			<Navbar bg='dark' variant='dark' expand='lg'>
-				<Navbar.Brand href='/Dashboard'>
-					Traffic App
-				</Navbar.Brand>
+				<Navbar.Brand href='/Dashboard'>Traffic App</Navbar.Brand>
 				<Navbar.Toggle aria-controls='basic-navbar-nav' />
 				<Navbar.Collapse id='basic-navbar-nav'>
 					<Nav className='ml-auto'>
 						<NavDropdown title='Menu' id='basic-nav-dropdown'>
 							<NavDropdown.Item href='#'>
 								Profile
-								</NavDropdown.Item>
+							</NavDropdown.Item>
 							<NavDropdown.Item href='#'>
 								Quizzes
-								</NavDropdown.Item>
+							</NavDropdown.Item>
 							<NavDropdown.Divider />
 							<NavDropdown.Item onClick={logOut} href='#'>
 								Logout
-								</NavDropdown.Item>
+							</NavDropdown.Item>
 						</NavDropdown>
 					</Nav>
 				</Navbar.Collapse>
 			</Navbar>
 			<Container fluid>
-				<Row>
-					&nbsp;
-				</Row>
+				<Row>&nbsp;</Row>
 				<Row>
 					<Col>
 						<h2>Dashboard</h2>
 					</Col>
 				</Row>
-				<Row>
-					&nbsp;
-				</Row>
+				<Row>&nbsp;</Row>
 				<Row>
 					<Col md={2}>
 						<Filters

@@ -1,3 +1,6 @@
 .dropdown-menu.show {
 	left: -70px;
 }
+.weatherCard {
+	margin-bottom: 20px;
+}

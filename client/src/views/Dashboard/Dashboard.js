@@ -25,14 +25,14 @@ const Dashboard = props => {
 	 * Begin Filter Information
 	 */
 	const cities = [
-		'Tampa',
-		'Orlando',
-		'Atlanta',
-		'Austin',
-		'Las Vegas',
-		'New York',
-		'Gainesville',
-		'St. Pete',
+		{ value: 'tampa', label: 'Tampa, FL' },
+		{ value: 'orlando', label: 'Orlando, FL' },
+		{ value: 'Atlanta', label: 'Atlanta, GA' },
+		{ value: 'Austin', label: 'Austin, TX' },
+		{ value: 'Las Vegas', label: 'Las Vegas, NV' },
+		{ value: 'New York', label: 'New York, NY' },
+		{ value: 'Gainesville', label: 'Gainesville, FL' },
+		{ value: 'St. Pete', label: 'St. Pete, FL' },
 	];
 
 	const [startDate, setStartDate] = useState(new Date());
@@ -43,9 +43,9 @@ const Dashboard = props => {
 	 */
 
 	// If not signed in or old token, redirect to login
-	if (!props.currUser || !tokenManager.isValid()) {
-		return <Redirect to='/'></Redirect>;
-	}
+	// if (!props.currUser || !tokenManager.isValid()) {
+	// 	return <Redirect to='/'></Redirect>;
+	// }
 
 	function logOut() {
 		tokenManager.removeToken();
@@ -60,35 +60,39 @@ const Dashboard = props => {
 
 	return (
 		<div>
-			<Container fluid>
-				<Navbar bg='light' expand='lg'>
-					<Navbar.Brand href='/Dashboard'>
-						Welcome, {props.currUser.email}
-					</Navbar.Brand>
-					<Navbar.Toggle aria-controls='basic-navbar-nav' />
-					<Navbar.Collapse id='basic-navbar-nav'>
-						<Nav className='ml-auto'>
-							<NavDropdown title='Menu' id='basic-nav-dropdown'>
-								<NavDropdown.Item href='#'>
-									Profile
+			<Navbar bg='dark' variant='dark' expand='lg'>
+				<Navbar.Brand href='/Dashboard'>
+					Traffic App
+				</Navbar.Brand>
+				<Navbar.Toggle aria-controls='basic-navbar-nav' />
+				<Navbar.Collapse id='basic-navbar-nav'>
+					<Nav className='ml-auto'>
+						<NavDropdown title='Menu' id='basic-nav-dropdown'>
+							<NavDropdown.Item href='#'>
+								Profile
 								</NavDropdown.Item>
-								<NavDropdown.Item href='#'>
-									Quizzes
+							<NavDropdown.Item href='#'>
+								Quizzes
 								</NavDropdown.Item>
-								<NavDropdown.Divider />
-								<NavDropdown.Item onClick={logOut} href='#'>
-									Logout
+							<NavDropdown.Divider />
+							<NavDropdown.Item onClick={logOut} href='#'>
+								Logout
 								</NavDropdown.Item>
-							</NavDropdown>
-						</Nav>
-					</Navbar.Collapse>
-				</Navbar>
-			</Container>
+						</NavDropdown>
+					</Nav>
+				</Navbar.Collapse>
+			</Navbar>
 			<Container fluid>
 				<Row>
+					&nbsp;
+				</Row>
+				<Row>
 					<Col>
-						<h2>#CITY Overview</h2>
+						<h2>Dashboard</h2>
 					</Col>
+				</Row>
+				<Row>
+					&nbsp;
 				</Row>
 				<Row>
 					<Col md={2}>
@@ -104,242 +108,10 @@ const Dashboard = props => {
 						</Button>{' '}
 					</Col>
 					<Col md={8}>
-						<h4>Accident Information</h4>
-						<Table striped bordered hover>
-							<thead>
-								<tr>
-									<th>Time</th>
-									<th>Address</th>
-									<th>Report Details</th>
-									<th>Number of Drivers Involved</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-							</tbody>
-						</Table>
+						<h4>Accident Graph</h4>
 					</Col>
 					<Col md={2}>
-						<h4>Hourly Weather</h4>
-						<Table striped bordered hover>
-							<thead>
-								<tr>
-									<th>Hour</th>
-									<th>Weather</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-							</tbody>
-						</Table>
+						<h4>Weather</h4>
 					</Col>
 				</Row>
 			</Container>

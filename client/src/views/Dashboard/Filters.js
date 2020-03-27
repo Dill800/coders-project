@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import CheckBox from './CheckBox';
+import Select from 'react-select';
 
 import {
 	Navbar,
@@ -17,6 +17,21 @@ import {
 } from 'react-bootstrap';
 
 const Filters = props => {
+
+	let cityOptions = props.cities;
+
+	if (props.selectedCities.length == 4) {
+		cityOptions = [];
+	}
+
+	function setLocations(inputValue) {
+		let selectedLocations = [];
+		for (let i = 0; i < inputValue.length; i++) {
+			selectedLocations.push(inputValue[i].value);
+		}
+		props.setSelectedCities(selectedLocations);
+	}
+
 	return (
 		<div>
 			<Container fluid>
@@ -34,12 +49,14 @@ const Filters = props => {
 					<h4>Select Cities</h4>
 				</Row>
 				<Row>
-					<CheckBox
-						selectedCities={props.selectedCities}
-						setSelectedCities={props.setSelectedCities}
-						cities={props.cities}
+					<Select
+						options={cityOptions}
+						isMulti
+						className='col-8'
+						onChange={(inputValue) => setLocations(inputValue)}
 					/>
 				</Row>
+				<Row>&nbsp;</Row>
 			</Container>
 		</div>
 	);

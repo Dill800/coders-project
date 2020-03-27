@@ -12,12 +12,16 @@ import {
 	Button,
 } from 'react-bootstrap';
 import './Dashboard.css';
+
 import Filters from './Filters';
 import WeatherDisplay from './WeatherDisplay';
+
+
 
 const tokenManager = require('../../tokenManager');
 
 const Dashboard = props => {
+
 	useEffect(() => {
 		console.log('effecrt used');
 	});
@@ -72,6 +76,33 @@ const Dashboard = props => {
 		console.log(selectedCities);
 	}
 
+	//let cities = ['Royal Palm Beach', 'Gainesville', 'Jupiter']
+	//let date = '2020-02-02'
+
+	
+
+	function buttonClicked() {
+
+		let chartData = [];
+
+		let calls = [];
+		cities.forEach((val, ind) => {
+			calls.push(axios.get('/accidentData/totalInfo/?date=' + date + '&city=' + val + '&state=Florida'))
+		})
+
+		axios.all(calls)
+		.then(
+			axios.spread((...responses) => {
+				responses.map(response => {
+					chartData.push(response.data)
+				})
+
+				setData(chartData)
+			})
+		)
+
+	}
+
 	return (
 		<div>
 			<Navbar bg='dark' variant='dark' expand='lg'>
@@ -95,7 +126,30 @@ const Dashboard = props => {
 				</Navbar.Collapse>
 			</Navbar>
 			<Container fluid>
-				<Row>&nbsp;</Row>
+				<Navbar bg='light' expand='lg'>
+					<Navbar.Brand href='/Dashboard'>Welcome, {props.currUser.email}</Navbar.Brand>
+					<button onClick={buttonClicked}>Test</button>
+					<Navbar.Toggle aria-controls='basic-navbar-nav' />
+					<Navbar.Collapse id='basic-navbar-nav'>
+						<Nav className='ml-auto'>
+							<NavDropdown title='Menu' id='basic-nav-dropdown'>
+								<NavDropdown.Item href='#'>
+									Profile
+								</NavDropdown.Item>
+								<NavDropdown.Item href='#'>
+									Quizzes
+								</NavDropdown.Item>
+								<NavDropdown.Divider />
+								<NavDropdown.Item onClick = {logOut} href='#'>
+									Logout
+								</NavDropdown.Item>
+							</NavDropdown>
+						</Nav>
+					</Navbar.Collapse>
+				</Navbar>
+			</Container>
+			<Container fluid>
+
 				<Row>
 					<Col>
 						<h2>Dashboard</h2>
@@ -103,6 +157,7 @@ const Dashboard = props => {
 				</Row>
 				<Row>&nbsp;</Row>
 				<Row>
+
 					<Col md={2}>
 						<Filters
 							date={date}
@@ -123,6 +178,7 @@ const Dashboard = props => {
 						<WeatherDisplay weather={weather} />
 					</Col>
 				</Row>
+
 			</Container>
 		</div>
 	);

@@ -46,7 +46,9 @@ const Quiz = (props) => {
 
     const submitAns = () => {
         if(answerChoice !== 0 && questionNum < count - 1 && answerChoice === questions.data[questionNum].answer){
-            setChoice(0);
+
+            
+
             setQuestion(questionNum + 1);
             setWrong1(false);
             setWrong2(false);

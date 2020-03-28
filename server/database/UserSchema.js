@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
 	city : {type: String, required: true},
 	state: {type: String, required: true},
     passwordHash : {type: String, required: true},
-    accessLevel : {type: mongoose.Number, required: true}
+	accessLevel : {type: mongoose.Number, required: true},
+	stars : {type: mongoose.Number}
 });
 
 // Password hashing methods

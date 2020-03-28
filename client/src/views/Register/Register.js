@@ -10,7 +10,8 @@ const Register = (props) => {
     const [pass, setPass] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
-    
+    const [isAdmin, setAdmin] = useState(false);
+
     const submit = (event) => {
         event.preventDefault();
         axios.post('/users', {
@@ -19,7 +20,8 @@ const Register = (props) => {
           passwordHash: pass,
           city: city,
           state: state,
-          accessLevel: 0
+          accessLevel: isAdmin ? 1 : 0,
+          stars: 0
 
         }).then(response => {
           if(response.data.success === 0) {
@@ -48,8 +50,9 @@ const Register = (props) => {
     const onStateChange = (event) => {
         setState(event.target.value);
     }
-
-
+    const onChecked = event => {
+        setAdmin(event.target.checked)
+    }
 
     return (
         <Container>
@@ -93,10 +96,14 @@ const Register = (props) => {
   <div >
   <Form.Group className="inline" id="formGridCheckbox">
     <Form.Check type="checkbox" label="I agree with the"/>
-<a href=" ">&nbsp;terms and conditions.</a>
+    <a href=" ">&nbsp;terms and conditions.</a>
   </Form.Group>
   </div>
-
+    <div>
+  <Form.Group className="inline" id="formGridCheckbox">
+    <Form.Check onChange={onChecked} type="checkbox" label="I am an insurance company"/>
+  </Form.Group>
+  </div>
   <Form.Group className='button'>
   <Button variant="primary" type="submit">
     Register

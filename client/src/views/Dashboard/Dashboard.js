@@ -38,26 +38,12 @@ const Dashboard = props => {
 		})
 	}, [])
 
-	/**
-	 * Begin Filter Information
-	 */
-
 	// filter info
 	const [date, setDate] = useState('');
 	const [selectedLocations, setSelectedLocations] = useState([]);
 
 	// data (city json)
-	const [data, setData] = useState({});
-
-	// data is a list of JSON in format:
-	/*
-	{
-		city:
-		state:
-		weather:
-		accidents:
-	}
-	*/
+	const [data, setData] = useState([]);
 
 	const weather = [
 		{ location: 'Tampa', value: 'Sunny' },
@@ -75,6 +61,14 @@ const Dashboard = props => {
 		tokenManager.removeToken();
 		props.setCurrUser(null);
 		props.history.push('/login');
+	}
+
+	function admin() {
+		props.history.push('/admin')
+	}
+
+	function quiz() {
+		props.history.push('/quiz')
 	}
 
 	function applyFilters() {
@@ -108,7 +102,7 @@ const Dashboard = props => {
 	return (
 		<div>
 			<Navbar bg='dark' variant='dark' expand='lg'>
-				<Navbar.Brand href='/Dashboard'>Traffic App</Navbar.Brand>
+			<Navbar.Brand href='/Dashboard'>Welcome, {props.currUser.email}</Navbar.Brand>
 				<Navbar.Toggle aria-controls='basic-navbar-nav' />
 				<Navbar.Collapse id='basic-navbar-nav'>
 					<Nav className='ml-auto'>
@@ -116,9 +110,12 @@ const Dashboard = props => {
 							<NavDropdown.Item href='#'>
 								Profile
 							</NavDropdown.Item>
-							<NavDropdown.Item href='#'>
+							<NavDropdown.Item href='#' onClick={quiz}>
 								Quizzes
 							</NavDropdown.Item>
+							{props.currUser.accessLevel === 1 && <NavDropdown.Item onClick={admin} href='#'>
+								Add Accidents
+							</NavDropdown.Item>}
 							<NavDropdown.Divider />
 							<NavDropdown.Item onClick={logOut} href='#'>
 								Logout

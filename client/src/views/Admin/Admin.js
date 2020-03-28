@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
 import {Alert, Button, Container, Col, Row, Form,} from 'react-bootstrap'
 import './Admin.css'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
+const tokenManager = require('../../tokenManager');
 
 const Admin = (props) => {
 
@@ -10,6 +11,11 @@ const Admin = (props) => {
     const [date, setDate] = useState('');
     const [city, setCity] = useState('');
     const [accidents, setAccidents] = useState('');
+
+    // If not signed in or old token or not admin, redirect to login
+    if (!tokenManager.getCurrentUser() || tokenManager.getCurrentUser().accessLevel !== 1) {
+      return <Redirect to='/dashboard'></Redirect>;
+    }
 
     const submit = (event) => {
       event.preventDefault();

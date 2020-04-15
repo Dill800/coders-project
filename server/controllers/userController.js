@@ -4,7 +4,6 @@ const signToken = require('../authFuncts').signToken;
 module.exports = {
 
     authenticate: async (req, res) => {
-
         User.findOne({email: req.body.username}, (err, user) => {
 
             if(err) {
@@ -66,12 +65,24 @@ module.exports = {
 
     },
 
-    changeStars: async(req, res) => {
-        console.log("Logging quiz question result...")
-        User.findOneAndUpdate({email: req.body.email}, {$inc: {stars: res.stars}}, (err, doc) =>{
+    getStars: async(req, res) => {
+        console.log("Getting stars...")
+        User.findOne(req.payload.username, (err, entry) => {
             if(err){
-                console.log(err)
-                res.send({success: 0, message: 'Error during user update...'})
+                console.log(err);
+                res.send({success: 0, message: "Error during user query..."})
+            }
+            if(entry){
+                res.send({success: 1, stars: entry.stars})
+            }
+        })
+    },
+
+    changeStars: async(user, stars) => {
+        console.log("Logging quiz question result...")
+        User.findOneAndUpdate({email: user}, {$inc: {stars: stars}}, (err, doc) =>{
+            if(err){
+                console.log("Error changing user stars.")
             }
         })
     }

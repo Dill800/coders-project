@@ -4,9 +4,8 @@ const secret = process.env.secret || 'thesecret'
 
 function signToken(user) {
     const userData = user.toObject();
-    const username = userData.username;
-    delete userData.passwordHash;
-    return jwt.sign({username}, secret, {expiresIn: 140000})
+    const username = userData.email;
+    return jwt.sign({username: username}, secret, {expiresIn: 140000})
 }
 
 function authToken(req, res, next){
@@ -17,6 +16,7 @@ function authToken(req, res, next){
        return res.status(401).end()
     }
 
+    var payload
     try {
         // Parse the JWT string and store the result in `payload`.
         // Note that we are passing the key in this method as well. This method will throw an error
@@ -33,6 +33,8 @@ function authToken(req, res, next){
         console.log("Bad request.")
         return res.status(400).end()
       }
+
+    req.payload = payload
 
     // now the user is authorized!
     console.log("User token authorized.")

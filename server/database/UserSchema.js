@@ -5,11 +5,13 @@ const bcrypt = require('bcryptjs');
 const collectionName = 'users'
 const userSchema = new mongoose.Schema({
 	email : {type: String, required: true},
+	address : {type: String, required: true},
 	city : {type: String, required: true},
 	state: {type: String, required: true},
     passwordHash : {type: String, required: true},
 	accessLevel : {type: mongoose.Number, required: true},
-	stars : {type: mongoose.Number}
+	stars : {type: mongoose.Number, required : true},
+	dashcamInCar : {type : Boolean, required : true}
 });
 
 // Password hashing methods

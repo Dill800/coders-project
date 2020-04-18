@@ -1,3 +1,4 @@
+
 import React, {useState} from 'react';
 import { Link, Route, Switch, Redirect  } from 'react-router-dom';
 import Home from "./views/Home/Home";
@@ -7,7 +8,7 @@ import NotFound from "./views/NotFound";
 import Forgot from "./views/Forgot/Forgot";
 import Quiz from "./views/Quiz/Quiz";
 import Dashboard from "./views/Dashboard/Dashboard"
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './assets/bootstrap.min.css';
 import Admin from "./views/Admin/Admin";
 import Privilege from "./views/Privilege/Privilege";
 import List from "./views/List/List";

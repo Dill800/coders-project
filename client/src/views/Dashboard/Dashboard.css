@@ -12,7 +12,60 @@ input.form-control {
 }
 label.form-label {
 	margin-bottom: 0;
+	font-size: 1rem;
 }
 label.cities-label.form-label {
 	margin-bottom: 0.9rem;
+}
+@media (min-width: 1200px) {
+	.container,
+	.container-sm,
+	.container-md,
+	.container-lg,
+	.container-xl {
+		max-width: 1000000px;
+	}
+}
+@media (min-width: 992px) {
+	.container,
+	.container-sm,
+	.container-md,
+	.container-lg,
+	.container-xl {
+		max-width: 1000000px;
+	}
+}
+@media (min-width: 768px) {
+	.container,
+	.container-sm,
+	.container-md,
+	.container-lg,
+	.container-xl {
+		max-width: 1000000px;
+	}
+}
+@media (min-width: 576px) {
+	.container,
+	.container-sm,
+	.container-md,
+	.container-lg,
+	.container-xl {
+		max-width: 1000000px;
+	}
+}
+.container {
+	padding-right: 3%;
+	padding-left: 3%;
+}
+@media (min-width: 992px) {
+	.navbar {
+		padding-left: 0rem;
+		padding-right: 0rem;
+	}
+}
+@media (max-width: 768px) {
+	.accidents {
+		padding-top: 30px;
+		padding-bottom: 10px;
+	}
 }

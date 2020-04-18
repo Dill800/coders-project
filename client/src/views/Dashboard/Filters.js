@@ -41,7 +41,7 @@ const Filters = (props) => {
 		<div>
 			<Container fluid>
 				<Row>
-					<h4>Filters</h4>
+					<h3>Filters</h3>
 				</Row>
 				<Row>&nbsp;</Row>
 				<Row>

@@ -156,13 +156,13 @@ const Dashboard = (props) => {
 						</Button>
 					</Col>
 					<Col md={8}>
-						<h4>Accident Graph</h4>
+						<h3 className='accidents'>Accident Graph</h3>
 						<DataVis data={data} />
 					</Col>
 				</Row>
 				<Row>
 					<Col md={12}>
-						<h4>Weather</h4>
+						<h3>Weather</h3>
 					</Col>
 				</Row>
 				<WeatherDisplay data={data} />

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import 'react-datepicker/dist/react-datepicker.css'; // https://reactdatepicker.com/
 import Select from 'react-select'; // https://react-select.com/home
 
 import {
@@ -15,7 +14,7 @@ import {
 	Form,
 } from 'react-bootstrap';
 
-const Filters = props => {
+const Filters = (props) => {
 	let cityOptions = props.cities;
 
 	if (props.selectedCities.length == 4) {
@@ -23,15 +22,17 @@ const Filters = props => {
 	}
 
 	function setLocations(inputValue) {
-
-		if(inputValue === null) {
-			props.setSelectedCities([])
-			return
+		if (inputValue === null) {
+			props.setSelectedCities([]);
+			return;
 		}
 
 		let selectedLocations = [];
 		for (let i = 0; i < inputValue.length; i++) {
-			selectedLocations.push({city: inputValue[i].city, state: inputValue[i].state});
+			selectedLocations.push({
+				city: inputValue[i].city,
+				state: inputValue[i].state,
+			});
 		}
 		props.setSelectedCities(selectedLocations);
 	}
@@ -40,14 +41,15 @@ const Filters = props => {
 		<div>
 			<Container fluid>
 				<Row>
-					<h4>Select Date</h4>
+					<h4>Filters</h4>
 				</Row>
+				<Row>&nbsp;</Row>
 				<Row>
 					<Form>
 						<Form.Group>
 							<Form.Label>Date</Form.Label>
 							<Form.Control
-								onChange={event =>
+								onChange={(event) =>
 									props.setDate(event.target.value)
 								}
 								required
@@ -57,18 +59,18 @@ const Filters = props => {
 						</Form.Group>
 					</Form>
 				</Row>
-				<Row>&nbsp;</Row>
 				<Row>
-					<h4>Select Cities</h4>
+					<Form.Label className='cities-label'>Cities</Form.Label>
 				</Row>
 				<Row>
 					<Select
 						options={cityOptions}
 						isMulti
 						className='col-8'
-						onChange={inputValue => setLocations(inputValue)}
+						onChange={(inputValue) => setLocations(inputValue)}
 					/>
 				</Row>
+				<Row>&nbsp;</Row>
 				<Row>&nbsp;</Row>
 			</Container>
 		</div>

@@ -4,3 +4,15 @@
 .weatherCard {
 	margin-bottom: 20px;
 }
+div.col-8.css-2b097c-container {
+	padding: 0px;
+}
+input.form-control {
+	padding: 0 0;
+}
+label.form-label {
+	margin-bottom: 0;
+}
+label.cities-label.form-label {
+	margin-bottom: 0.9rem;
+}

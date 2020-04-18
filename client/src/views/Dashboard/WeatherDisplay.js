@@ -10,22 +10,24 @@ import {
 	Form,
 } from 'react-bootstrap';
 
-const WeatherDisplay = props => {
+const WeatherDisplay = (props) => {
 	const weatherCards = [];
 
 	for (let i = 0; i < props.data.length; i++) {
-		console.log(props.data)
+		console.log(props.data);
 		weatherCards.push(
-			<Card style={{ width: '100%' }} className='weatherCard'>
-				<Card.Body>
-					<Card.Title>{props.data[i].city}</Card.Title>
-					<Card.Text>{props.data[i].weather}</Card.Text>
-				</Card.Body>
-			</Card>,
+			<Col md={3}>
+				<Card style={{ width: '100%' }} className='weatherCard'>
+					<Card.Body>
+						<Card.Title>{props.data[i].city}</Card.Title>
+						<Card.Text>{props.data[i].weather}</Card.Text>
+					</Card.Body>
+				</Card>
+			</Col>
 		);
 	}
 
-	return <div>{weatherCards}</div>;
+	return <Row>{weatherCards}</Row>;
 };
 
 export default WeatherDisplay;

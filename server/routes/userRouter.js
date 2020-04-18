@@ -6,4 +6,5 @@ const userController = require('../controllers/userController')
 userRouter.post('/', userController.exists, userController.create)
 userRouter.post('/login', userController.authenticate)
 
+
 module.exports = userRouter

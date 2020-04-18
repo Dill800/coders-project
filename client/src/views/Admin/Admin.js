@@ -10,6 +10,8 @@ const Admin = (props) => {
     const [state, setState] = useState('');
     const [date, setDate] = useState('');
     const [city, setCity] = useState('');
+    const [street1, setStreet1] = useState('');
+    const [street2, setStreet2] = useState('');
     const [accidents, setAccidents] = useState('');
 
     // If not signed in or old token or not admin, redirect to login
@@ -22,6 +24,8 @@ const Admin = (props) => {
       console.log('State', state)
       console.log('Date', date)
       console.log('City', city)
+      console.log('Street 1', street1)
+      console.log('Street 2', street2)
       console.log('Accidents', accidents)
 
       axios.post('/accidentData',
@@ -29,6 +33,8 @@ const Admin = (props) => {
           state: state,
           date: date,
           city: city,
+          street1: street1,
+          street2: street2,
           accidents: accidents
         }
       )
@@ -49,6 +55,12 @@ const Admin = (props) => {
     }
     const onAccidentsChange = (event) => {
         setAccidents(event.target.value);
+    }
+    const onStreet1Change = (event) => {
+        setStreet1(event.target.value);
+    }
+    const onStreet2Change = (event) => {
+        setStreet2(event.target.value);
     }
 
     return (
@@ -80,6 +92,20 @@ const Admin = (props) => {
       <Form.Control onChange={onDateChange} required type="Date" placeholder="mm/dd/yyyy" />
     </Form.Group>
 </Form.Row>
+
+<Form.Row>
+    <Form.Group as={Col} controlId="formGridCity">
+      <Form.Label>Street 1</Form.Label>
+      <Form.Control onChange={onStreet1Change} required type="Street 1" placeholder="Street 1" />
+    </Form.Group>
+</Form.Row>
+<Form.Row>
+    <Form.Group as={Col} controlId="formGridCity">
+      <Form.Label>Street 2</Form.Label>
+      <Form.Control onChange={onStreet2Change} type="Street 2" placeholder="Street 2" />
+    </Form.Group>
+</Form.Row>
+
 <Form.Row>
     <Form.Group as={Col} controlId="formGridCity">
       <Form.Label>Number of Accidents</Form.Label>

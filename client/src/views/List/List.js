@@ -2,23 +2,34 @@ import React, {useState, useEffect} from 'react';
 import UserList from './Components/UserList';
 import ViewUsers from './Components/ViewUsers';
 import Search from './Components/Search';
-import data from './data/data';
 import './List.css'
-
+//import data from './data/data'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import axios from 'axios'
 
 const List = (props) => {
     const [filterText, setFilterText] = useState('');
     const [selectedUser, setSelectedUser] = useState('');
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        pullInData()
+    }, [])
+
+    function pullInData() {
+        axios.get('/users/getUsers')
+        .then(response => {
+            setData(response.data.data)
+        })
+    }
 
     const filterUpdate = (value) => {
         setFilterText(value);
     };
 
-    const selectedUpdate = (id) => {
-        setSelectedUser(id);
-        console.log(selectedUser)
+    const selectedUpdate = (email) => {
+        setSelectedUser(email);
     };
 
 
@@ -55,6 +66,7 @@ const List = (props) => {
                         <ViewUsers 
                         data={data}
                         selected={selectedUser}
+                        refreshData={pullInData}
                             />
                     </div>
                 </div>

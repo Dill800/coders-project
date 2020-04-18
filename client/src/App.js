@@ -9,6 +9,9 @@ import Quiz from "./views/Quiz/Quiz";
 import Dashboard from "./views/Dashboard/Dashboard"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Admin from "./views/Admin/Admin";
+import Privilege from "./views/Privilege/Privilege";
+import List from "./views/List/List";
+
 
 const tokenManager = require('./tokenManager')
 
@@ -45,6 +48,9 @@ const App = () => {
         <Route exact path="/register" component={Register}/>
         <Route exact path="/forgot-password" component={Forgot}/>
         <Route exact path="/quiz" component={Quiz}/>
+          {/*For Testing - it is not linked to user */}
+        <Route exact path="/privilege" component={Privilege}/>
+        <Route exact path="/list" component={List}/>
 
         <Route component={NotFound}/>
       </Switch>

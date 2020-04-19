@@ -170,12 +170,6 @@ const Register = (props) => {
 </Form.Row>
 
 {/* Checkboxes */}
-  <div>
-  <Form.Group className="inline" id="formGridCheckbox">
-    <Form.Check type="checkbox" label="I agree with the"/>
-    <a href=" ">&nbsp;terms and conditions.</a>
-  </Form.Group>
-  </div>
 
   <div>
   <Form.Group className="inline" id="formGridCheckbox">

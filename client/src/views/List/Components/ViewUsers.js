@@ -13,38 +13,23 @@ const ViewUsers = (props) => {
             props.refreshData();
         })
     }
-
+    
     const userList = 
     props.data.map(directory => {
+        
     if (directory.email == props.selected) 
         return (
             <div>
                 <h1>Email: {directory.email}</h1>
                 <h3>Access Level: {directory.accessLevel}</h3>
                 <button onClick={() => {updateAccess(directory)}}>{directory.accessLevel === 0 ? 'Promote' : 'Demote'}</button>
-
-            {/*
-            <table>
-            <tr key={directory.email}>
-                <th> Email: </th>
-                <td>{directory.email} </td>
-                </tr>
-                <tr>
-                <th> Access Level: </th>
-                <td>{directory.accessLevel}</td>
-                </tr>
-                <tr>
-                <td onClick={updateAccess(directory)}> {directory.accessLevel === 0 ? 'Promote' : 'Demote'} </td>
-                </tr>
-            </table>
-            */}
            </div>
         );
 
 
     });
     
-
+    
     return <div>{userList}</div>
 };
 export default ViewUsers;

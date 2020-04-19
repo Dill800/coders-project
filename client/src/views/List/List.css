@@ -19,12 +19,10 @@ header {
 	margin-bottom: 2rem;
 }
 .h1 {
-  height: 150px;
-  width: 1000px;
+  height: 90%;
+  width: 100%;
   color: black;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: block;
   text-align: center;
 }
 input[type='text'] {

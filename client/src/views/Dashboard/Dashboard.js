@@ -61,11 +61,15 @@ const Dashboard = (props) => {
 	}
 
 	function admin() {
-		props.history.push('/admin');
+		props.history.push('/addAccident');
 	}
 
 	function quiz() {
 		props.history.push('/quiz');
+	}
+
+	function users() {
+		props.history.push('/users')
 	}
 
 	function applyFilters() {
@@ -120,12 +124,18 @@ const Dashboard = (props) => {
 								<NavDropdown.Item href='#' onClick={quiz}>
 									Quizzes
 								</NavDropdown.Item>
-								{props.currUser.accessLevel === 1 && (
+								{props.currUser.accessLevel !== 0 && (
+									<React.Fragment>
 									<NavDropdown.Item onClick={admin} href='#'>
 										Add Accidents
 									</NavDropdown.Item>
+									<NavDropdown.Item onClick={users} href='#'>
+										View Users
+									</NavDropdown.Item>
+									</React.Fragment>
 								)}
 								<NavDropdown.Divider />
+								
 								<NavDropdown.Item onClick={logOut} href='#'>
 									Logout
 								</NavDropdown.Item>

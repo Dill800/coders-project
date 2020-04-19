@@ -70,6 +70,7 @@ const Quiz = (props) => {
                     setWrong2(false);
                     setWrong3(false);
                     setWrong4(false);
+                    //axios.post('/users/addStar');
                 }
                 else{
                     switch (answerChoice){

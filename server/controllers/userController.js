@@ -112,11 +112,11 @@ module.exports = {
     },
 
     changeStars: async(user, stars) => {
-        console.log("Logging quiz question result...")
         User.findOneAndUpdate({email: user}, {$inc: {stars: stars}}, (err, doc) =>{
             if(err){
                 console.log("Error changing user stars.")
             }
+            console.log(doc)
         })
     }
 

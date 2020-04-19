@@ -34,11 +34,12 @@ module.exports = {
             }
 
             if (questionData.answer == req.body.answer){
-                userContoller.changeStars(req.payload.username, 1)
+                console.log("Req Payload: ", req)
+                userContoller.changeStars(req.payload.email, 1)
                 res.send({success: 1})
             }
             else{
-                userContoller.changeStars(req.payload.username, -1)
+                userContoller.changeStars(req.payload.email, -1)
                 res.send({success: -1})
             }
         })

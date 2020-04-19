@@ -45,13 +45,13 @@ const App = () => {
           }}
         />
 
-        <Route exact path="/admin" component={Admin}/>
+        <Route exact path="/addAccident" component={Admin}/>
         <Route exact path="/register" component={Register}/>
         <Route exact path="/forgot-password" component={Forgot}/>
         <Route exact path="/quiz" component={Quiz}/>
           {/*For Testing - it is not linked to user */}
         <Route exact path="/privilege" component={Privilege}/>
-        <Route exact path="/list" component={List}/>
+        <Route exact path="/users" component={List}/>
 
         <Route component={NotFound}/>
       </Switch>

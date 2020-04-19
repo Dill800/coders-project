@@ -11,16 +11,12 @@ const Admin = (props) => {
 	const [city, setCity] = useState('');
 	const [accidents, setAccidents] = useState('');
 
-	console.log(
-		tokenManager.getCurrentUser() +
-			' ' +
-			tokenManager.getCurrentUser().accessLevel
-	);
+
 
 	// If not signed in or old token or not admin, redirect to login
 	if (
 		!tokenManager.getCurrentUser() ||
-		tokenManager.getCurrentUser().accessLevel !== 1
+		tokenManager.getCurrentUser().accessLevel === 0
 	) {
 		return <Redirect to='/dashboard'></Redirect>;
 	}

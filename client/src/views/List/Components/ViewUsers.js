@@ -1,13 +1,11 @@
 import React from 'react';
 import axios from 'axios'
+import tokenManager from '../../../tokenManager'
 
 // card
 const ViewUsers = (props) => {
-    console.log(props.selected)
 
     function updateAccess(user) {
-        console.log('SJDFKJSDHF I RAN')
-        console.log(user.email, user.accessLevel === 0 ? 1 : 0)
         axios.post('/users/updatePrivilege', {email: user.email, newAccessLevel: user.accessLevel === 0 ? 1 : 0})
         .then(() => {
             props.refreshData();
@@ -22,7 +20,8 @@ const ViewUsers = (props) => {
             <div>
                 <h1>Email: {directory.email}</h1>
                 <h3>Access Level: {directory.accessLevel}</h3>
-                <button onClick={() => {updateAccess(directory)}}>{directory.accessLevel === 0 ? 'Promote' : 'Demote'}</button>
+                
+                {tokenManager.getCurrentUser().accessLevel === 2 && <button onClick={() => {updateAccess(directory)}}>{directory.accessLevel === 0 ? 'Promote' : 'Demote'}</button>}
            </div>
         );
 

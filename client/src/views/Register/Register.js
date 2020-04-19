@@ -8,6 +8,7 @@ const Register = (props) => {
 
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
@@ -20,6 +21,7 @@ const Register = (props) => {
 
           email: email,
           passwordHash: pass,
+          phoneNumber : phoneNumber,
           address: address,
           city: city,
           state: state,
@@ -46,9 +48,12 @@ const Register = (props) => {
     const onPassChange = (event) => {
         setPass(event.target.value);
     }
+    const onPhoneNumberChange = (event) => {
+        setPhoneNumber(event.target.value);
+    }
     const onAddressChange = (event) => {
       setAddress(event.target.value);
-  }
+     }
     const onCityChange = (event) => {
         setCity(event.target.value);
     }
@@ -85,6 +90,12 @@ const Register = (props) => {
     <Form.Group as={Col} controlId="formGridPassword">
       <Form.Label>Password</Form.Label>
       <Form.Control onChange={onPassChange} required type="password" placeholder="Password" />
+    </Form.Group>
+</Form.Row>
+<Form.Row>
+    <Form.Group as={Col} controlId="formGridPhoneNumber">
+      <Form.Label>Phone Number</Form.Label>
+      <Form.Control onChange={onPhoneNumberChange} required type="phoneNumber" placeholder="Phone Number" />
     </Form.Group>
 </Form.Row>
 <Form.Row>

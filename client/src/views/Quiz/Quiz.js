@@ -6,7 +6,7 @@ import axios from 'axios'
 
 const Quiz = (props) => {
     const [answerChoice, setChoice] = useState(0);
-    const [questionNum, setQuestion] = useState(Math.floor(Math.random() * 5));
+    const [questionNum, setQuestion] = useState(Math.floor(Math.random() * 1));
     const [wrong1, setWrong1] = useState(false);
     const [wrong2, setWrong2] = useState(false);
     const [wrong3, setWrong3] = useState(false);
@@ -44,12 +44,6 @@ const Quiz = (props) => {
 
     const getNextQuestionNum = () => {
         var nextQuestion;
-        if(answeredQuestions.length === 0){
-            answeredQuestions.push(questionNum);
-            nextQuestion = Math.floor(Math.random() * count);
-            answeredQuestions.push(nextQuestion);
-            return nextQuestion;
-        }
         if(answeredQuestions.length === count){
             nextQuestion = Math.floor(Math.random() * count);
             setAnsweredQuestions([nextQuestion]);
@@ -65,33 +59,41 @@ const Quiz = (props) => {
     }
 
     const submitAns = () => {
-        if(answerChoice === questions.data[questionNum].answer){
-            setQuestion(getNextQuestionNum());
-            setChoice(0);
-            setWrong1(false);
-            setWrong2(false);
-            setWrong3(false);
-            setWrong4(false);
-        }
-        if(answerChoice !== questions.data[questionNum].answer){
-            switch (answerChoice){
-                case 1:
-                    setWrong1(true);
-                    break;
-                case 2:
-                    setWrong2(true);
-                    break;
-                case 3:
-                    setWrong3(true);
-                    break;
-                case 4:
-                    setWrong4(true);
-                    break;
-                default:
-                    
-            }
+        setLoading(true)
+        axios.post('/questionData/answer', {  
+            question: questions.data[questionNum].question,
+            answer: answerChoice}).then(response => {
+                if(response.data.success == 1){
+                    setQuestion(getNextQuestionNum());
+                    setChoice(0);
+                    setWrong1(false);
+                    setWrong2(false);
+                    setWrong3(false);
+                    setWrong4(false);
+                }
+                else{
+                    switch (answerChoice){
+                        case 1:
+                            setWrong1(true);
+                            break;
+                        case 2:
+                            setWrong2(true);
+                            break;
+                        case 3:
+                            setWrong3(true);
+                            break;
+                        case 4:
+                            setWrong4(true);
+                            break;
+                        default:
+                            
+                    }
 
-        }
+                }
+
+                setLoading(false)
+        })
+
     }
 
     return (

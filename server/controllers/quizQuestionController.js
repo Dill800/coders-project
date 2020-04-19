@@ -25,8 +25,9 @@ module.exports = {
     },
 
     checkQuizAnswer : async(req, res, next) => {
-        quizQuestionCollection.find({question: req.question}, (err, questionData) => {
-
+        quizQuestionCollection.findOne({question: req.body.question}, (err, questionData) => {
+            console.log(req.body)
+            console.log(questionData)
             if(err) {
                 res.send({success: 0, message: "there was an error"});
                 res.end()

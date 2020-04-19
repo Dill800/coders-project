@@ -6,30 +6,28 @@ import axios from 'axios'
 
 const Quiz = (props) => {
     const [answerChoice, setChoice] = useState(0);
-    const [questionNum, setQuestion] = useState(0);
+    const [questionNum, setQuestion] = useState(Math.floor(Math.random() * 1));
     const [wrong1, setWrong1] = useState(false);
     const [wrong2, setWrong2] = useState(false);
     const [wrong3, setWrong3] = useState(false);
     const [wrong4, setWrong4] = useState(false);
     const [questions, setQuestions] = useState(null);
-    const [isLoading, setLoading] = useState(true)
+    const [isLoading, setLoading] = useState(true);
+    const [answeredQuestions, setAnsweredQuestions] = useState([]);
 
     // fetch quiz questions
     useEffect(() => {
         axios.get('/questionData')
     .then(response => {
         setQuestions(response.data)
-        setLoading(false)
+        setLoading(false);
     })
     }, [isLoading])
 
     // if loading return loading screen
     if(isLoading) return <p>Loading</p>
 
-    let count = 0;
-    if(questions !== null) {
-        count = questions.data.length
-    }
+    var count = questions.data.length
 
     const answer1 = () => {
         setChoice(1);
@@ -44,44 +42,58 @@ const Quiz = (props) => {
         setChoice(4);
     };
 
-    const submitAns = () => {
-        if(answerChoice !== 0 && questionNum < count - 1 && answerChoice === questions.data[questionNum].answer){
-
-            
-
-            setQuestion(questionNum + 1);
-            setWrong1(false);
-            setWrong2(false);
-            setWrong3(false);
-            setWrong4(false);
+    const getNextQuestionNum = () => {
+        var nextQuestion;
+        if(answeredQuestions.length === count){
+            nextQuestion = Math.floor(Math.random() * count);
+            setAnsweredQuestions([nextQuestion]);
+            return nextQuestion;
         }
-        if(answerChoice !== 0 && questionNum === count - 1 && answerChoice === questions.data[questionNum].answer){
-            setChoice(0);
-            setQuestion(0);
-            setWrong1(false);
-            setWrong2(false);
-            setWrong3(false);
-            setWrong4(false);
-        }
-        if(answerChoice !== questions.data[questionNum].answer){
-            switch (answerChoice){
-                case 1:
-                    setWrong1(true);
-                    break;
-                case 2:
-                    setWrong2(true);
-                    break;
-                case 3:
-                    setWrong3(true);
-                    break;
-                case 4:
-                    setWrong4(true);
-                    break;
-                default:
-                    
+        while(true){
+            nextQuestion = Math.floor(Math.random() * count);
+            if(answeredQuestions.indexOf(nextQuestion) === -1){
+                answeredQuestions.push(nextQuestion);
+                return nextQuestion;
             }
-
         }
+    }
+
+    const submitAns = () => {
+        setLoading(true)
+        axios.post('/questionData/answer', {  
+            question: questions.data[questionNum].question,
+            answer: answerChoice}).then(response => {
+                if(response.data.success == 1){
+                    setQuestion(getNextQuestionNum());
+                    setChoice(0);
+                    setWrong1(false);
+                    setWrong2(false);
+                    setWrong3(false);
+                    setWrong4(false);
+                }
+                else{
+                    switch (answerChoice){
+                        case 1:
+                            setWrong1(true);
+                            break;
+                        case 2:
+                            setWrong2(true);
+                            break;
+                        case 3:
+                            setWrong3(true);
+                            break;
+                        case 4:
+                            setWrong4(true);
+                            break;
+                        default:
+                            
+                    }
+
+                }
+
+                setLoading(false)
+        })
+
     }
 
     return (

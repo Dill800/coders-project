@@ -1,12 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import UserList from './Components/UserList';
 import ViewUsers from './Components/ViewUsers';
+import { Link } from 'react-router-dom';
 import Search from './Components/Search';
-import './List.css'
-//import data from './data/data'
+import './List.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import axios from 'axios'
+import Dashboard from '../Dashboard/Dashboard';
+import Privilege from '../Privilege/Privilege';
 
 const List = (props) => {
     const [filterText, setFilterText] = useState('');
@@ -35,6 +37,9 @@ const List = (props) => {
 
     return (
         <div className="bg">
+        <Link to='/dashboard'>
+                        <button>Go Back to Dashboard</button>
+                    </Link>
             <div className="row">
                 <h1 class="h1">User Directory List</h1>
             </div>

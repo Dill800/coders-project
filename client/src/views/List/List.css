@@ -12,6 +12,10 @@ body {
 main {
 	padding: 0 2rem;
 }
+.btn:hover{
+	background:rgb(190, 190, 190);
+
+}
 
 /* ##### Search ##### */
 header {

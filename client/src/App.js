@@ -1,13 +1,13 @@
 
-import React, {useState} from 'react';
-import { Link, Route, Switch, Redirect  } from 'react-router-dom';
-import Home from "./views/Home/Home";
-import Login from "./views/Login/Login";
-import Register from "./views/Register/Register";
-import NotFound from "./views/NotFound";
-import Forgot from "./views/Forgot/Forgot";
-import Quiz from "./views/Quiz/Quiz";
-import Dashboard from "./views/Dashboard/Dashboard"
+import React, { useState } from 'react';
+import { Link, Route, Switch, Redirect } from 'react-router-dom';
+import Home from './views/Home/Home';
+import Login from './views/Login/Login';
+import Register from './views/Register/Register';
+import NotFound from './views/NotFound';
+import Forgot from './views/Forgot/Forgot';
+import Quiz from './views/Quiz/Quiz';
+
 import './assets/bootstrap.min.css';
 import Admin from "./views/Admin/Admin";
 import Privilege from "./views/Privilege/Privilege";

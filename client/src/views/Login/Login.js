@@ -66,27 +66,24 @@ const Login = (props) => {
 
             <Form onSubmit={submit}>
             <Form.Group controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control onChange={onEmailChange} required type="email" placeholder="Enter email" />
+                <Form.Label style={{fontSize: '22px'}}>Email address</Form.Label>
+                <Form.Control style={{fontSize: '18px'}} onChange={onEmailChange} required type="email" placeholder="Enter email" />
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control onChange={onPassChange} required type="password" placeholder="Password" />
+                <Form.Label style={{fontSize: '22px'}}>Password</Form.Label>
+                <Form.Control style={{fontSize: '22px'}} onChange={onPassChange} required type="password" placeholder="Password" />
             </Form.Group>
             
-            <Button block variant="outline-primary" type="submit">
+            <Button block variant="outline-primary" type="submit" style={{fontSize: '18px'}}>
                 Login
             </Button>
             </Form>
             </Col>
             </Row>
 
-            <div className='forgot-password-container'>
-                <Link to='/forgot-password'>Forgot Password?</Link>
-            </div>
             <div className='create-account-container'>
-                <Link to='/register'>Register</Link>
+                <Link to='/register' style={{fontSize: '18px'}}>Register</Link>
             </div>
 
             <Modal show={errShow} onHide={close}>

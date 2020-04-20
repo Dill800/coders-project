@@ -41,18 +41,19 @@ const Filters = (props) => {
 		<div>
 			<Container fluid>
 				<Row>
-					<h3>Filters</h3>
+					<h2>Filters</h2>
 				</Row>
 				<Row>&nbsp;</Row>
 				<Row>
 					<Form>
 						<Form.Group>
-							<Form.Label>Date</Form.Label>
+							<Form.Label style={{fontSize: '20px'}}>Date</Form.Label>
 							<Form.Control
 								onChange={(event) =>
 									props.setDate(event.target.value)
 								}
 								required
+								style={{fontSize: '16px'}}
 								type='Date'
 								placeholder='mm/dd/yyyy'
 							/>
@@ -60,10 +61,11 @@ const Filters = (props) => {
 					</Form>
 				</Row>
 				<Row>
-					<Form.Label className='cities-label'>Cities</Form.Label>
+					<Form.Label style={{fontSize: '20px'}} className='cities-label'>Cities</Form.Label>
 				</Row>
 				<Row>
 					<Select
+						style={{fontSize: '16px'}}
 						options={cityOptions}
 						isMulti
 						className='col-8'

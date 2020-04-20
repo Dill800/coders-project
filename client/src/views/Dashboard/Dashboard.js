@@ -117,16 +117,17 @@ const Dashboard = (props) => {
 					<Navbar.Toggle aria-controls='basic-navbar-nav' />
 					<Navbar.Collapse id='basic-navbar-nav'>
 						<Nav className='ml-auto'>
-							<NavDropdown title='Menu' id='basic-nav-dropdown'>
-								<NavDropdown.Item href='#'>
+							<NavDropdown style={{fontSize: '20px'}} title='Menu' id='basic-nav-dropdown'>
+								<NavDropdown.Item style={{fontSize: '16px'}} href='#'>
 									Profile
 								</NavDropdown.Item>
-								<NavDropdown.Item href='#' onClick={quiz}>
+								<NavDropdown.Item style={{fontSize: '16px'}} href='#' onClick={quiz}>
 									Quizzes
 								</NavDropdown.Item>
+
 								{props.currUser.accessLevel !== 0 && (
 									<React.Fragment>
-									<NavDropdown.Item onClick={admin} href='#'>
+									<NavDropdown.Item style={{fontSize: '16px'}} onClick={admin} href='#'>
 										Add Accidents
 									</NavDropdown.Item>
 									<NavDropdown.Item onClick={users} href='#'>
@@ -135,8 +136,9 @@ const Dashboard = (props) => {
 									</React.Fragment>
 								)}
 								<NavDropdown.Divider />
-								
-								<NavDropdown.Item onClick={logOut} href='#'>
+
+								<NavDropdown.Item style={{fontSize: '16px'}} onClick={logOut} href='#'>
+
 									Logout
 								</NavDropdown.Item>
 							</NavDropdown>
@@ -148,7 +150,7 @@ const Dashboard = (props) => {
 				<Row>&nbsp;</Row>
 				<Row>
 					<Col>
-						<h2>Dashboard</h2>
+						<h1>Dashboard</h1>
 					</Col>
 				</Row>
 				<Row>&nbsp;</Row>
@@ -166,13 +168,13 @@ const Dashboard = (props) => {
 						</Button>
 					</Col>
 					<Col md={8}>
-						<h3 className='accidents'>Accident Graph</h3>
+						<h2 className='accidents'>Accident Graph</h2>
 						<DataVis data={data} />
 					</Col>
 				</Row>
 				<Row>
 					<Col md={12}>
-						<h3>Weather</h3>
+						<h2>Weather</h2>
 					</Col>
 				</Row>
 				<WeatherDisplay data={data} />

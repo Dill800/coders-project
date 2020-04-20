@@ -8,6 +8,7 @@ userRouter.post('/login', userController.authenticate)
 userRouter.get('/getUsers', userController.getUsers)
 userRouter.post('/updatePrivilege', userController.updatePrivilege)
 //userRouter.post('/addStar', userController.changeStars)
+userRouter.get('/getStars', userController.getStars)
 
 
 module.exports = userRouter

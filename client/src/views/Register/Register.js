@@ -25,7 +25,7 @@ const Register = (props) => {
           address: address,
           city: city,
           state: state,
-          accessLevel: isAdmin ? 1 : 0,
+          accessLevel: 0,
           dashcamInCar : dashcam ? 1 : 0,
           stars: 0
 
@@ -59,9 +59,6 @@ const Register = (props) => {
     }
     const onStateChange = (event) => {
         setState(event.target.value);
-    }
-    const onAdminChecked = event => {
-        setAdmin(event.target.checked)
     }
     const onDashCamChecked = event => {
       setDashcam(event.target.checked)
@@ -171,11 +168,6 @@ const Register = (props) => {
 
 {/* Checkboxes */}
 
-  <div>
-  <Form.Group className="inline" id="formGridCheckbox">
-    <Form.Check onChange={onAdminChecked} type="checkbox" label="I am an insurance company"/>
-  </Form.Group>
-  </div>
 
   <div>
   <Form.Group className="inline" id="formGridCheckbox">

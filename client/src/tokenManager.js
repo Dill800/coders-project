@@ -13,6 +13,7 @@ function getCurrentUser() {
     const token = this.getToken();
     return (token ? jwt.decode(token) : null)
 }
+
 //Vince
 //find the user in mongoose and update their token. 
 //Pull from the mongoose database

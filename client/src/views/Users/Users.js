@@ -98,6 +98,7 @@ const List = (props) => {
 					</Container>
 				</Row>
 			</Container>
+			<br/>
 		</div>
 	);
 };

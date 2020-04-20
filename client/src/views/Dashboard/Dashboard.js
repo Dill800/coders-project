@@ -14,12 +14,14 @@ import Filters from './Filters';
 import WeatherDisplay from './WeatherDisplay';
 import DataVis from '../../components/DataVis/DataVis';
 import axios from 'axios';
+import { token } from 'morgan';
 
 const tokenManager = require('../../tokenManager');
 
 const Dashboard = (props) => {
 	// Load in distinct values on loading of component
 	const [distinctCities, setDistinctCities] = useState([{}]);
+	const [stars, setStars] = useState(tokenManager.getCurrentUser().stars)
 
 	useEffect(() => {
 		axios.get('/accidentData/distinct').then((response) => {
@@ -36,6 +38,15 @@ const Dashboard = (props) => {
 			});
 			setDistinctCities(inter);
 		});
+		console.log(tokenManager.getCurrentUser().email)
+		axios.get('users/getStars?email=' + tokenManager.getCurrentUser().email)
+		.then(response => {
+			console.log(response)
+			setStars(response.data.stars)
+		})
+		
+		
+
 	}, []);
 
 	// filter info
@@ -63,6 +74,8 @@ const Dashboard = (props) => {
 	function quiz() {
 		props.history.push('/quiz');
 	}
+
+
 
 	function users() {
 		props.history.push('/users');
@@ -109,6 +122,9 @@ const Dashboard = (props) => {
 				<Container>
 					<Navbar.Brand href='/Dashboard'>
 						Welcome, {props.currUser.email}
+					</Navbar.Brand>
+					<Navbar.Brand href='/Dashboard'>
+						Stars: {stars}
 					</Navbar.Brand>
 					<Navbar.Toggle aria-controls='basic-navbar-nav' />
 					<Navbar.Collapse id='basic-navbar-nav'>

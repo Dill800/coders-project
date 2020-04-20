@@ -16,7 +16,7 @@ const tokenManager = require('./tokenManager');
 
 const App = () => {
 	const [currUser, setCurrUser] = useState(tokenManager.getCurrentUser());
-//
+
 	return (
 		<div>
 			<Switch>

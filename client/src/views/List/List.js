@@ -62,16 +62,15 @@ const List = (props) => {
                         <div className="tableWrapper">
                             <table className="table table-striped table-hover">
                                 <tr>
-                                    <td>
-                                        <b>Username</b>
-                                    </td>
-                                
-                                </tr>
+
+                                <b className='centered'>Username</b>
                                 <UserList
+                                
                                     data={data}
                                     update={filterText}
                                     updateSelected={selectedUpdate}
                                 />
+                                </tr>
                             </table>
                         </div>
                     </div>

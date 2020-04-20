@@ -6,9 +6,7 @@ import {
 	NavDropdown,
 	Container,
 	Row,
-	Table,
 	Col,
-	Card,
 	Button,
 } from 'react-bootstrap';
 import './Dashboard.css';
@@ -18,8 +16,6 @@ import DataVis from '../../components/DataVis/DataVis';
 import axios from 'axios';
 
 const tokenManager = require('../../tokenManager');
-
-//TODO: make weather have icons
 
 const Dashboard = (props) => {
 	// Load in distinct values on loading of component
@@ -69,7 +65,7 @@ const Dashboard = (props) => {
 	}
 
 	function users() {
-		props.history.push('/users')
+		props.history.push('/users');
 	}
 
 	function applyFilters() {
@@ -117,28 +113,50 @@ const Dashboard = (props) => {
 					<Navbar.Toggle aria-controls='basic-navbar-nav' />
 					<Navbar.Collapse id='basic-navbar-nav'>
 						<Nav className='ml-auto'>
-							<NavDropdown style={{fontSize: '20px'}} title='Menu' id='basic-nav-dropdown'>
-								<NavDropdown.Item style={{fontSize: '16px'}} href='#'>
+							<NavDropdown
+								style={{ fontSize: '20px' }}
+								title='Menu'
+								id='basic-nav-dropdown'
+							>
+								<NavDropdown.Item
+									style={{ fontSize: '16px' }}
+									href='#'
+								>
 									Profile
 								</NavDropdown.Item>
-								<NavDropdown.Item style={{fontSize: '16px'}} href='#' onClick={quiz}>
+								<NavDropdown.Item
+									style={{ fontSize: '16px' }}
+									href='#'
+									onClick={quiz}
+								>
 									Quizzes
 								</NavDropdown.Item>
 
 								{props.currUser.accessLevel !== 0 && (
 									<React.Fragment>
-									<NavDropdown.Item style={{fontSize: '16px'}} onClick={admin} href='#'>
-										Add Accidents
-									</NavDropdown.Item>
-									<NavDropdown.Item onClick={users} href='#'>
-										View Users
-									</NavDropdown.Item>
+										<NavDropdown.Item
+											style={{ fontSize: '16px' }}
+											onClick={admin}
+											href='#'
+										>
+											Add Accidents
+										</NavDropdown.Item>
+										<NavDropdown.Item
+											style={{ fontSize: '16px' }}
+											onClick={users}
+											href='#'
+										>
+											View Users
+										</NavDropdown.Item>
 									</React.Fragment>
 								)}
 								<NavDropdown.Divider />
 
-								<NavDropdown.Item style={{fontSize: '16px'}} onClick={logOut} href='#'>
-
+								<NavDropdown.Item
+									style={{ fontSize: '16px' }}
+									onClick={logOut}
+									href='#'
+								>
 									Logout
 								</NavDropdown.Item>
 							</NavDropdown>

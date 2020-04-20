@@ -19,8 +19,8 @@ const WeatherDisplay = (props) => {
 			<Col md={3}>
 				<Card style={{ width: '100%' }} className='weatherCard'>
 					<Card.Body>
-						<Card.Title>{props.data[i].city}</Card.Title>
-						<Card.Text>{props.data[i].weather}</Card.Text>
+						<Card.Title style={{fontSize: '20px'}}>{props.data[i].city}</Card.Title>
+						<Card.Text style={{fontSize: '16px'}}>{props.data[i].weather}</Card.Text>
 					</Card.Body>
 				</Card>
 			</Col>

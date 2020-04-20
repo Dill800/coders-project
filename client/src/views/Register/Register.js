@@ -16,7 +16,14 @@ const Register = (props) => {
     const [dashcam, setDashcam] = useState(false);
 
     const submit = (event) => {
+
         event.preventDefault();
+
+        if (state == ''){
+          alert("Please select a state");
+          return;
+        }
+
         axios.post('/users', {
 
           email: email,
@@ -67,6 +74,9 @@ const Register = (props) => {
       setDashcam(event.target.checked)
   }
 
+  const checkStateFieldEmpty = (event) => {
+    alert("no state selected.");
+  }
     return (
         <Container>
             <Row className='justify-content-center'>
@@ -77,7 +87,7 @@ const Register = (props) => {
             
             </div>
 
-            <Form onSubmit={submit}>
+            <Form onSubmit = {(true) ? submit : checkStateFieldEmpty}>
 
 {/* Forms Boxes */}
 <Form.Row>
@@ -113,7 +123,7 @@ const Register = (props) => {
 <Form.Row>
     <Form.Group as={Col} controlId="formGridState">
       <Form.Label>State</Form.Label>
-      <Form.Control required as="select" onChange={onStateChange}>
+      <Form.Control as="select" onChange={onStateChange} required type="state">
         <option>Choose...</option>
         <option>Alabama</option>
         <option>Alaska</option>

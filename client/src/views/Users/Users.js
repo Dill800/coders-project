@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import UserList from './Components/UserList';
-import ViewUsers from './Components/ViewUsers';
 import { Link, Redirect } from 'react-router-dom';
-import Search from './Components/Search';
-// import './List.css';
-//import 'bootstrap/dist/css/bootstrap.min.css';
 import {
 	Navbar,
 	Nav,
@@ -15,10 +10,15 @@ import {
 	Col,
 	Card,
 	Button,
+	Form,
+	Tab,
 } from 'react-bootstrap';
 
 import axios from 'axios';
 import tokenManager from '../../tokenManager';
+import Search from './Search';
+import UserList from './UserList';
+import ViewUser from './ViewUser';
 
 const List = (props) => {
 	const [filterText, setFilterText] = useState('');
@@ -43,46 +43,61 @@ const List = (props) => {
 		});
 	}
 
-	const filterUpdate = (value) => {
-		setFilterText(value);
-	};
-
 	const selectedUpdate = (email) => {
 		setSelectedUser(email);
 	};
 
 	return (
-		<div className='bg'>
-			<h1>User Directory List</h1>
-
-			<Search update={filterUpdate} />
-
-			<Container fluid>
+		<div>
+			<Container>
 				<Row>
-					<Col xs={6}>
-						<h2 className='table-title'>Username</h2>
-						<div className='tableWrapper'>
-							<table className='table'>
-								<UserList
-									data={data}
-									update={filterText}
-									updateSelected={selectedUpdate}
-								/>
-							</table>
-						</div>
+					<Col>
+						<h1 style={{ textAlign: 'center', paddingTop: '70px' }}>
+							User Directory List
+						</h1>
 					</Col>
-					<Col xs={6}>
-						<ViewUsers
+				</Row>
+				<Row>
+					<Col xs={12}>
+						<Search update={setFilterText} value={filterText} />
+					</Col>
+				</Row>
+				<Row>
+					<Col md={6}>
+						<Table striped bordered hover>
+							<thead>
+								<tr>
+									<th style={{ fontSize: '22px' }}>Email</th>
+								</tr>
+							</thead>
+							<UserList
+								data={data}
+								update={filterText}
+								updateSelected={selectedUpdate}
+							/>
+						</Table>
+					</Col>
+					<Col md={6}>
+						<ViewUser
 							data={data}
 							selected={selectedUser}
 							refreshData={pullInData}
 						/>
 					</Col>
 				</Row>
+				<Row>
+					<Container
+						className='button'
+						style={{ paddingTop: '20px' }}
+					>
+						<Link to='/dashboard'>
+							<Button variant='primary' type='dashboard'>
+								Dashboard
+							</Button>
+						</Link>
+					</Container>
+				</Row>
 			</Container>
-			<Link to='/dashboard'>
-				<button className='btn'>Dashboard</button>
-			</Link>
 		</div>
 	);
 };

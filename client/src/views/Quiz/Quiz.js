@@ -6,7 +6,7 @@ import axios from 'axios'
 
 const Quiz = (props) => {
     const [answerChoice, setChoice] = useState(0);
-    const [questionNum, setQuestion] = useState(Math.floor(Math.random() * 1));
+    const [questionNum, setQuestion] = useState(Math.floor(Math.random() * 5));
     const [wrong1, setWrong1] = useState(false);
     const [wrong2, setWrong2] = useState(false);
     const [wrong3, setWrong3] = useState(false);

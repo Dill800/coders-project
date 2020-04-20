@@ -47,7 +47,7 @@ const List = (props) => {
     return (
         <div className="bg">
         <Link to='/dashboard'>
-                        <button>Go Back to Dashboard</button>
+                        <button className='btn '>Dashboard</button>
                     </Link>
             <div className="row">
                 <h1 class="h1">User Directory List</h1>

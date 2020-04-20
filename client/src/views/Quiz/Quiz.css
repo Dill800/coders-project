@@ -16,3 +16,7 @@
 .btn-block:focus{
     background:rgb(190, 190, 190);
 }
+
+.btn:hover{
+    background:rgb(190, 190, 190);
+}

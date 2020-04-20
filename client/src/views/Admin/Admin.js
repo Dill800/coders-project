@@ -103,7 +103,9 @@ const Admin = (props) => {
 									as="select" 
 									onChange={onStateChange} 
 									type='state' 
+									style={{fontSize: "20px"}}
 									placeholder='State'>
+										
 									<option>Choose...</option>
 									<option>Alabama</option>
 									<option>Alaska</option>

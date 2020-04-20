@@ -63,7 +63,7 @@ const Login = (props) => {
 	};
 
 	return (
-		<Container style={{transform: "translateY(20%)"}}>
+		<Container style={{transform: "translateY(5%)"}}>
 			<Row  className='justify-content-center'>
 				<Col xs={9} md={6}>
 					<div className='landing-title-container'>

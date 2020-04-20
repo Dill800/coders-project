@@ -25,19 +25,21 @@ module.exports = {
     },
 
     checkQuizAnswer : async(req, res, next) => {
-        quizQuestionCollection.find({question: req.question}, (err, questionData) => {
-
+        quizQuestionCollection.findOne({question: req.body.question}, (err, questionData) => {
+            console.log(req.body)
+            console.log(questionData)
             if(err) {
                 res.send({success: 0, message: "there was an error"});
                 res.end()
             }
 
             if (questionData.answer == req.body.answer){
-                userContoller.changeStars(req.payload.username, 1)
+                console.log("Req Payload: ", req)
+                userContoller.changeStars(req.payload.email, 1)
                 res.send({success: 1})
             }
             else{
-                userContoller.changeStars(req.payload.username, -1)
+                userContoller.changeStars(req.payload.email, -1)
                 res.send({success: -1})
             }
         })

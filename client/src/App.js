@@ -1,4 +1,3 @@
-// Working Styles Branch
 
 import React, { useState } from 'react';
 import { Link, Route, Switch, Redirect } from 'react-router-dom';
@@ -8,57 +7,56 @@ import Register from './views/Register/Register';
 import NotFound from './views/NotFound';
 import Forgot from './views/Forgot/Forgot';
 import Quiz from './views/Quiz/Quiz';
-import './assets/bootstrap.min.css';
-import Dashboard from './views/Dashboard/Dashboard';
-import Admin from './views/Admin/Admin';
 
-const tokenManager = require('./tokenManager');
+import './assets/bootstrap.min.css';
+import Admin from "./views/Admin/Admin";
+import Privilege from "./views/Privilege/Privilege";
+import List from "./views/List/List";
+
+
+const tokenManager = require('./tokenManager')
 
 const App = () => {
-	const [currUser, setCurrUser] = useState(tokenManager.getCurrentUser());
 
-	return (
-		<div>
-			<Switch>
-				<Route
-					exact
-					path='/'
-					render={(props) => {
-						return <Redirect to='/login' />;
-					}}
-				/>
+  const [currUser, setCurrUser] = useState(tokenManager.getCurrentUser())
 
-				<Route
-					exact
-					path='/login'
-					render={(props) => {
-						return <Login {...props} setCurrUser={setCurrUser} />;
-					}}
-				/>
+  return (
+    <div>
+      <Switch>
+        
+        <Route
+          exact path='/'
+          render={(props) => {
+            return <Redirect to='/login'/>
+          }}
+        />
 
-				<Route
-					exact
-					path='/dashboard'
-					render={(props) => {
-						return (
-							<Dashboard
-								{...props}
-								currUser={currUser}
-								setCurrUser={setCurrUser}
-							/>
-						);
-					}}
-				/>
+        <Route
+          exact path='/login'
+          render={(props) => {
+            return <Login {...props} setCurrUser={setCurrUser}/>
+          }}
+        />
 
-				<Route exact path='/admin' component={Admin} />
-				<Route exact path='/register' component={Register} />
-				<Route exact path='/forgot-password' component={Forgot} />
-				<Route exact path='/quiz' component={Quiz} />
+        <Route
+          exact path='/dashboard'
+          render={(props) => {
+            return <Dashboard {...props} currUser={currUser} setCurrUser={setCurrUser}/>
+          }}
+        />
 
-				<Route component={NotFound} />
-			</Switch>
-		</div>
-	);
-};
+        <Route exact path="/addAccident" component={Admin}/>
+        <Route exact path="/register" component={Register}/>
+        <Route exact path="/forgot-password" component={Forgot}/>
+        <Route exact path="/quiz" component={Quiz}/>
+          {/*For Testing - it is not linked to user */}
+        <Route exact path="/privilege" component={Privilege}/>
+        <Route exact path="/users" component={List}/>
+
+        <Route component={NotFound}/>
+      </Switch>
+    </div>
+  );
+}
 
 export default App;

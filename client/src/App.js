@@ -7,12 +7,12 @@ import Register from './views/Register/Register';
 import NotFound from './views/NotFound';
 import Forgot from './views/Forgot/Forgot';
 import Quiz from './views/Quiz/Quiz';
-
 import './assets/bootstrap.min.css';
+import Dashboard from './views/Dashboard/Dashboard'
 import Admin from "./views/Admin/Admin";
 import Privilege from "./views/Privilege/Privilege";
 import List from "./views/List/List";
-import Dashboard from './views/Dashboard/Dashboard'
+
 
 const tokenManager = require('./tokenManager')
 

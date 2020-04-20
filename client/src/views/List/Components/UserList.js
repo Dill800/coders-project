@@ -8,7 +8,7 @@ const userList =
 props.data.map(directory => {
     if (directory.email.toLowerCase().indexOf(props.update.toLowerCase()) != -1)
     return (
-        <tr key ={directory.email}>
+        <tr className='table-entry' key ={directory.email}>
         <td onClick={(e) => {props.updateSelected(directory.email)}}> {directory.email}</td>
         </tr>
     );

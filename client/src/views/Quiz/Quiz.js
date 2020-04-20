@@ -6,7 +6,7 @@ import axios from 'axios'
 
 const Quiz = (props) => {
     const [answerChoice, setChoice] = useState(0);
-    const [questionNum, setQuestion] = useState(Math.floor(Math.random() * 5));
+    const [questionNum, setQuestion] = useState(0);
     const [wrong1, setWrong1] = useState(false);
     const [wrong2, setWrong2] = useState(false);
     const [wrong3, setWrong3] = useState(false);
@@ -70,7 +70,7 @@ const Quiz = (props) => {
                     setWrong2(false);
                     setWrong3(false);
                     setWrong4(false);
-                    //axios.post('/users/addStar');
+                    axios.post('/users/addStar');
                 }
                 else{
                     switch (answerChoice){

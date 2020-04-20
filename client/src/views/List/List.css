@@ -14,7 +14,6 @@ main {
 }
 .btn:hover{
 	background:rgb(190, 190, 190);
-
 }
 
 /* ##### Search ##### */
@@ -22,14 +21,16 @@ header {
 	background: #3498db;
 	margin-bottom: 2rem;
 }
-.h1 {
+.user-title {
   height: 90%;
   width: 100%;
   color: black;
   display: block;
   text-align: center;
+  font-size: 40px;
+  margin: 30px 0px 20px 0px;
 }
-input[type='text'] {
+.searchBar input[type='text'] {
 	margin: 1rem;
 	background:white;
 	font-size: 1.3rem;
@@ -42,13 +43,6 @@ input[type='text'] {
 	font-weight: bold;
 }
 
-/* ##### NamesList ##### */
-tr {
-
-}
-th {
-	
-}
 td:hover {
 	position: left;
 	cursor: pointer;
@@ -61,6 +55,7 @@ td:hover {
   margin: 0;
   border: 1px solid grey;
   white-space: nowrap;
+  width: 48vw;
 }
 .column2 {
 	float: left;
@@ -68,24 +63,39 @@ td:hover {
 	padding: 20px;
 	background-color: white;
 	font-weight: bold;
+	width: 48vw;
 }
 
 /* ##### Rows ##### */
-.row {
+.table-row {
 	margin: 1rem;
+	width: 100%;
 }
 
-.row:after {
+.table-entry {
+	width: 100%;
+	font-size: 20px;
+	text-align: center;
+}
+
+.table-title {
+	text-align: center;
+	font-size: 30px;
+}
+
+.table-row:after {
 	padding: 1 0rem;
 	content: '';
 	display: table;
 	clear: both;
+	width: 100%;
 }
 
 .tableWrapper {
-	max-height: 800px;
+	max-height: 60vh;
 	overflow: auto;
 	scroll-behavior: smooth;
+	width: 100%;
 }
 
 /* ##### Footer ##### */
@@ -115,17 +125,17 @@ button:hover {
 	background: white
 }
 
-.row {
-	
-}
-
-.uibutton {
-	
-}
-
 .centered {
   height: 8vh; /* Magic here */
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 20px
+}
+
+.table {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
 }

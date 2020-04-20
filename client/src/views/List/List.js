@@ -4,11 +4,20 @@ import ViewUsers from './Components/ViewUsers';
 import { Link, Redirect } from 'react-router-dom';
 import Search from './Components/Search';
 import './List.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
+import {
+	Navbar,
+	Nav,
+	NavDropdown,
+	Container,
+	Row,
+	Table,
+	Col,
+	Card,
+	Button,
+} from 'react-bootstrap';
 
 import axios from 'axios'
-import Dashboard from '../Dashboard/Dashboard';
-import Privilege from '../Privilege/Privilege';
 import tokenManager from '../../tokenManager'
 
 const List = (props) => {
@@ -46,44 +55,44 @@ const List = (props) => {
 
     return (
         <div className="bg">
-        <Link to='/dashboard'>
-                        <button className='btn '>Dashboard</button>
-                    </Link>
-            <div className="row">
-                <h1 class="h1">User Directory List</h1>
-            </div>
+
+                <h1 class="user-title">User Directory List</h1>
+
 
             <Search update={filterUpdate}/>
             
-            <main>
+            <Container fluid>
 
-                <div className="row">
-                    <div className="column1">
-                        <div className="tableWrapper">
-                            <table className="table table-striped table-hover">
-                                <tr>
-
-                                <b className='centered'>Username</b>
-                                <UserList
+                <Row>
+                    <Col xs={6}>
+                        <h2 className='table-title'>Username</h2>
+                            <div className="tableWrapper">
+                            <table className="table">
                                 
+                                <UserList
+                                    
                                     data={data}
                                     update={filterText}
                                     updateSelected={selectedUpdate}
                                 />
-                                </tr>
+
                             </table>
                         </div>
-                    </div>
-                    
-                    <div className="column2">
-                        <ViewUsers 
+                    </Col>
+                    <Col xs={6}>
+                    <ViewUsers 
                         data={data}
                         selected={selectedUser}
                         refreshData={pullInData}
                             />
-                    </div>
-                </div>
-            </main>
+                    </Col>
+                </Row>
+
+            </Container>
+            <Link to='/dashboard'>
+                        <button className='btn'>Dashboard</button>
+            </Link>
+            
         </div>
     );
 };

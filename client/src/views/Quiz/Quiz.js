@@ -14,20 +14,12 @@ const Quiz = (props) => {
     const [questions, setQuestions] = useState(null);
     const [isLoading, setLoading] = useState(true);
     const [answeredQuestions, setAnsweredQuestions] = useState([]);
+    const [submitQ, setSubmit] = useState(false);
 
-    // fetch quiz questions
-    useEffect(() => {
-        axios.get('/questionData')
-    .then(response => {
-        setQuestions(response.data)
-        setLoading(false);
-    })
-    }, [isLoading])
 
-    // if loading return loading screen
-    if(isLoading) return <p>Loading</p>
-
-    var count = questions.data.length
+    function toggleQ(){
+        setSubmit(true)
+    }
 
     const answer1 = () => {
         setChoice(1);
@@ -42,60 +34,76 @@ const Quiz = (props) => {
         setChoice(4);
     };
 
-    const getNextQuestionNum = () => {
-        var nextQuestion;
-        if(answeredQuestions.length === count){
-            nextQuestion = Math.floor(Math.random() * count);
-            setAnsweredQuestions([nextQuestion]);
-            return nextQuestion;
-        }
-        while(true){
-            nextQuestion = Math.floor(Math.random() * count);
-            if(answeredQuestions.indexOf(nextQuestion) === -1){
-                answeredQuestions.push(nextQuestion);
-                return nextQuestion;
-            }
-        }
-    }
+    // fetch quiz questions
+    useEffect(() => {
+        axios.get('/questionData')
+    .then(response => {
+        setQuestions(response.data)
+        setQuestion(Math.floor(Math.random() * response.data.data.length))
+        answeredQuestions.push(questionNum)
+        setLoading(false);
+    })
+    }, [])
 
-    const submitAns = () => {
-        setLoading(true)
-        axios.post('/questionData/answer', {  
-            question: questions.data[questionNum].question,
-            answer: answerChoice}).then(response => {
-                if(response.data.success == 1){
-                    setQuestion(getNextQuestionNum());
-                    setChoice(0);
-                    setWrong1(false);
-                    setWrong2(false);
-                    setWrong3(false);
-                    setWrong4(false);
-                    axios.post('/users/addStar');
-                }
-                else{
-                    switch (answerChoice){
-                        case 1:
-                            setWrong1(true);
-                            break;
-                        case 2:
-                            setWrong2(true);
-                            break;
-                        case 3:
-                            setWrong3(true);
-                            break;
-                        case 4:
-                            setWrong4(true);
-                            break;
-                        default:
+    useEffect(() => {
+        if(submitQ == true){
+            setLoading(true)
+            axios.post('/questionData/answer', {  
+                question: questions.data[questionNum].question,
+                answer: answerChoice}).then(response => {
+                    if(response.data.success == 1){
+
+                        while(true){
+                            var nextQuestion;
+                            nextQuestion = Math.floor(Math.random() * questions.data.length);
                             
+                            if(answeredQuestions.length === questions.data.length && nextQuestion != questionNum){
+                                setAnsweredQuestions([nextQuestion]);
+                                setQuestion(nextQuestion);
+                                break;
+                            }
+                            else if(answeredQuestions.indexOf(nextQuestion) === -1){
+                                setAnsweredQuestions(answeredQuestions.concat(nextQuestion))
+                                setQuestion(nextQuestion)
+                                break;
+                            }
+                        }
+
+                        setChoice(0);
+                        setWrong1(false);
+                        setWrong2(false);
+                        setWrong3(false);
+                        setWrong4(false);
+                        axios.post('/users/addStar');
                     }
+                    else{
+                        switch (answerChoice){
+                            case 1:
+                                setWrong1(true);
+                                break;
+                            case 2:
+                                setWrong2(true);
+                                break;
+                            case 3:
+                                setWrong3(true);
+                                break;
+                            case 4:
+                                setWrong4(true);
+                                break;
+                            default:
+                                
+                        }
 
-                }
+                    }
+            })
+            setSubmit(false);
+            setLoading(false)
+        }
+    }, [submitQ, answeredQuestions, questionNum])
 
-                setLoading(false)
-        })
 
-    }
+    // if loading return loading screen
+    if(isLoading) return <p>Loading</p>
 
     return (
         <div>
@@ -112,7 +120,7 @@ const Quiz = (props) => {
                     </Link>
                     </Col>
                     <Col>
-                    <button className='btn btn-default btn-lg left' onClick={submitAns}>Submit</button>
+                    <button className='btn btn-default btn-lg left' onClick={toggleQ}>Submit</button>
                     </Col>
                 </Row>
             </Container>

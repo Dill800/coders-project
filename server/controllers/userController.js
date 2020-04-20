@@ -99,14 +99,18 @@ module.exports = {
     },
 
     getStars: async(req, res) => {
+        console.log(req.query)
         console.log("Getting stars...")
-        User.findOne(req.payload.username, (err, entry) => {
+        User.findOne({email: req.query.email}, (err, entry) => {
             if(err){
                 console.log(err);
                 res.send({success: 0, message: "Error during user query..."})
             }
             if(entry){
                 res.send({success: 1, stars: entry.stars})
+            }
+            else {
+                res.send("nighting")
             }
         })
     },

@@ -32,7 +32,7 @@ const Register = (props) => {
           address: address,
           city: city,
           state: state,
-          accessLevel: isAdmin ? 1 : 0,
+          accessLevel: 0,
           dashcamInCar : dashcam ? 1 : 0,
           stars: 0
 
@@ -66,9 +66,6 @@ const Register = (props) => {
     }
     const onStateChange = (event) => {
         setState(event.target.value);
-    }
-    const onAdminChecked = event => {
-        setAdmin(event.target.checked)
     }
     const onDashCamChecked = event => {
       setDashcam(event.target.checked)
@@ -123,7 +120,7 @@ const Register = (props) => {
 <Form.Row>
     <Form.Group as={Col} controlId="formGridState">
       <Form.Label>State</Form.Label>
-      <Form.Control as="select" onChange={onStateChange} required type="state">
+      <Form.Control style={{fontSize: "20px"}} required as="select" onChange={onStateChange}>
         <option>Choose...</option>
         <option>Alabama</option>
         <option>Alaska</option>
@@ -181,15 +178,10 @@ const Register = (props) => {
 
 {/* Checkboxes */}
 
-  <div>
-  <Form.Group className="inline" id="formGridCheckbox">
-    <Form.Check onChange={onAdminChecked} type="checkbox" label="I am an insurance company"/>
-  </Form.Group>
-  </div>
 
   <div>
   <Form.Group className="inline" id="formGridCheckbox">
-    <Form.Check onChange={onDashCamChecked} type="checkbox" label="I have a dashcam in my car"/>
+    <Form.Check style={{fontSize: "20px"}} onChange={onDashCamChecked} type="checkbox" label="I have a dashcam in my car"/>
   </Form.Group>
   </div>
 
@@ -201,7 +193,7 @@ const Register = (props) => {
   </Button>
   </Form.Group>
 </Form>
-<div className='already-have-an-account-container'>
+<div className='already-have-an-account-container' style={{marginBottom: "20px", fontSize: "20px"}}>
     <Link to='/'>Already Have an Account?</Link>
 </div>
 

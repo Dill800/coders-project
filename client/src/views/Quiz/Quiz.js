@@ -3,6 +3,7 @@ import {Container, Col, Row,} from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import './Quiz.css'
 import axios from 'axios'
+import tokenManager from '../../tokenManager'
 
 const Quiz = (props) => {
     const [answerChoice, setChoice] = useState(0);
@@ -15,7 +16,6 @@ const Quiz = (props) => {
     const [isLoading, setLoading] = useState(true);
     const [answeredQuestions, setAnsweredQuestions] = useState([]);
     const [submitQ, setSubmit] = useState(false);
-
 
     function toggleQ(){
         setSubmit(true)
@@ -107,7 +107,7 @@ const Quiz = (props) => {
 
     return (
         <div>
-            <Container className='quiz-container'>
+            <Container className='quiz-container' style={{transform: "translateY(20%)"}}>
                 <div><p className='question'>{questions.data[questionNum].question}</p></div>
                 <div><button className={wrong1 ? 'btn btn-default btn-lg btn-block wrongAns' : 'btn btn-default btn-lg btn-block'} onClick={answer1}>{questions.data[questionNum].choices[0]}</button></div>
                 <div><button className={wrong2 ? 'btn btn-default btn-lg btn-block wrongAns' : 'btn btn-default btn-lg btn-block'} onClick={answer2}>{questions.data[questionNum].choices[1]}</button></div>

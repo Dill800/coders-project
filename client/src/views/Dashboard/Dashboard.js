@@ -6,9 +6,7 @@ import {
 	NavDropdown,
 	Container,
 	Row,
-	Table,
 	Col,
-	Card,
 	Button,
 } from 'react-bootstrap';
 import './Dashboard.css';
@@ -16,14 +14,14 @@ import Filters from './Filters';
 import WeatherDisplay from './WeatherDisplay';
 import DataVis from '../../components/DataVis/DataVis';
 import axios from 'axios';
+import { token } from 'morgan';
 
 const tokenManager = require('../../tokenManager');
-
-//TODO: make weather have icons
 
 const Dashboard = (props) => {
 	// Load in distinct values on loading of component
 	const [distinctCities, setDistinctCities] = useState([{}]);
+	const [stars, setStars] = useState(tokenManager.getCurrentUser().stars)
 
 	useEffect(() => {
 		axios.get('/accidentData/distinct').then((response) => {
@@ -40,6 +38,15 @@ const Dashboard = (props) => {
 			});
 			setDistinctCities(inter);
 		});
+		console.log(tokenManager.getCurrentUser().email)
+		axios.get('users/getStars?email=' + tokenManager.getCurrentUser().email)
+		.then(response => {
+			console.log(response)
+			setStars(response.data.stars)
+		})
+		
+		
+
 	}, []);
 
 	// filter info
@@ -68,8 +75,10 @@ const Dashboard = (props) => {
 		props.history.push('/quiz');
 	}
 
+
+
 	function users() {
-		props.history.push('/users')
+		props.history.push('/users');
 	}
 
 	function applyFilters() {
@@ -114,31 +123,56 @@ const Dashboard = (props) => {
 					<Navbar.Brand href='/Dashboard'>
 						Welcome, {props.currUser.email}
 					</Navbar.Brand>
+					<Navbar.Brand href='/Dashboard'>
+						Stars: {stars}
+					</Navbar.Brand>
 					<Navbar.Toggle aria-controls='basic-navbar-nav' />
 					<Navbar.Collapse id='basic-navbar-nav'>
 						<Nav className='ml-auto'>
-							<NavDropdown style={{fontSize: '20px'}} title='Menu' id='basic-nav-dropdown'>
-								<NavDropdown.Item style={{fontSize: '16px'}} href='#'>
+							<NavDropdown
+								style={{ fontSize: '20px' }}
+								title='Menu'
+								id='basic-nav-dropdown'
+							>
+								<NavDropdown.Item
+									style={{ fontSize: '20px' }}
+									href='#'
+								>
 									Profile
 								</NavDropdown.Item>
-								<NavDropdown.Item style={{fontSize: '16px'}} href='#' onClick={quiz}>
+								<NavDropdown.Item
+									style={{ fontSize: '20px' }}
+									href='#'
+									onClick={quiz}
+								>
 									Quizzes
 								</NavDropdown.Item>
 
 								{props.currUser.accessLevel !== 0 && (
 									<React.Fragment>
-									<NavDropdown.Item style={{fontSize: '16px'}} onClick={admin} href='#'>
-										Add Accidents
-									</NavDropdown.Item>
-									<NavDropdown.Item onClick={users} href='#'>
-										View Users
-									</NavDropdown.Item>
+										<NavDropdown.Item
+											style={{ fontSize: '20px' }}
+											onClick={admin}
+											href='#'
+										>
+											Add Accidents
+										</NavDropdown.Item>
+										<NavDropdown.Item
+											style={{ fontSize: '20px' }}
+											onClick={users}
+											href='#'
+										>
+											View Users
+										</NavDropdown.Item>
 									</React.Fragment>
 								)}
 								<NavDropdown.Divider />
 
-								<NavDropdown.Item style={{fontSize: '16px'}} onClick={logOut} href='#'>
-
+								<NavDropdown.Item
+									style={{ fontSize: '20px' }}
+									onClick={logOut}
+									href='#'
+								>
 									Logout
 								</NavDropdown.Item>
 							</NavDropdown>

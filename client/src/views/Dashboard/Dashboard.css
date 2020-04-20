@@ -9,11 +9,13 @@ div.col-8.css-2b097c-container {
 	font-size: 16px;
 }
 input.form-control {
-	padding: 0 0;
+	font-size: 18px;
 }
-label.form-label {
-	margin-bottom: 0;
-	font-size: 1rem;
+.form-label {
+	font-size: 22px;
+}
+.btn {
+	font-size: 18px;
 }
 label.cities-label.form-label {
 	margin-bottom: 0.9rem;

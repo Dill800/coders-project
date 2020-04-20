@@ -12,7 +12,7 @@ import './assets/bootstrap.min.css';
 import Admin from "./views/Admin/Admin";
 import Privilege from "./views/Privilege/Privilege";
 import List from "./views/List/List";
-
+import Dashboard from './views/Dashboard/Dashboard'
 
 const tokenManager = require('./tokenManager')
 

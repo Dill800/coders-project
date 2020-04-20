@@ -20,7 +20,7 @@ const Admin = (props) => {
 	const [city, setCity] = useState('');
 	const [street1, setStreet1] = useState('');
 	const [street2, setStreet2] = useState('');
-	const [accidents, setAccidents] = useState('');
+	const [accidents, setAccidents] = useState(0);
 
 	// If not signed in or old token or not admin, redirect to login
 	if (
@@ -38,6 +38,16 @@ const Admin = (props) => {
 		console.log('Street 2', street2);
 		console.log('Accidents', accidents);
 
+		if (state == ''){
+			event.preventDefault();
+			alert("Please select a state");
+			return;
+		}
+		if (accidents <= 0){
+			event.preventDefault();
+			alert("Number of accidents must be greater than 0");
+			return;
+		}
 		axios
 			.post('/accidentData', {
 				state: state,
@@ -88,12 +98,64 @@ const Admin = (props) => {
 						<Form.Row>
 							<Form.Group as={Col} controlId='formGridEmail'>
 								<Form.Label>State</Form.Label>
-								<Form.Control
-									onChange={onStateChange}
-									required
-									type='state'
-									placeholder='State'
-								/>
+								<Form.Control 
+									required 
+									as="select" 
+									onChange={onStateChange} 
+									type='state' 
+									placeholder='State'>
+									<option>Choose...</option>
+									<option>Alabama</option>
+									<option>Alaska</option>
+									<option>Arizona</option>
+									<option>Arkansas</option>
+									<option>California</option>
+									<option>Colorado</option>
+									<option>Connecticut</option>
+									<option>Delaware</option>
+									<option>Florida</option>
+									<option>Georgia</option>
+									<option>Hawaii</option>
+									<option>Idaho</option>
+									<option>Illinois</option>
+									<option>Indiana</option>
+									<option>Iowa</option>
+									<option>Kansas</option>
+									<option>Kentucky</option>
+									<option>Louisiana</option>
+									<option>Maine</option>
+									<option>Maryland</option>
+									<option>Massachusetts</option>
+									<option>Michigan</option>
+									<option>Minnesota</option>
+									<option>Mississippi</option>
+									<option>Missouri</option>
+									<option>Montana</option>
+									<option>Nebraska</option>
+									<option>Nevada</option>
+									<option>New Hampshire</option>
+									<option>New Jersey</option>
+									<option>New Mexico</option>
+									<option>New York</option>
+									<option>North Carolina</option>
+									<option>North Dakota</option>
+									<option>Ohio</option>
+									<option>Oklahoma</option>
+									<option>Oregon</option>
+									<option>Pennsylvania</option>
+									<option>Rhode Island</option>
+									<option>South Carolina</option>
+									<option>South Dakota</option>
+									<option>Tennessee</option>
+									<option>Texas</option>
+									<option>Utah</option>
+									<option>Vermont</option>
+									<option>Virginia</option>
+									<option>Washington</option>
+									<option>West Virginia</option>
+									<option>Wisconsin</option>
+									<option>Wyoming</option>
+								</Form.Control>
 							</Form.Group>
 						</Form.Row>
 						<Form.Row>

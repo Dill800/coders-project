@@ -135,13 +135,13 @@ const Dashboard = (props) => {
 								id='basic-nav-dropdown'
 							>
 								<NavDropdown.Item
-									style={{ fontSize: '16px' }}
+									style={{ fontSize: '20px' }}
 									href='#'
 								>
 									Profile
 								</NavDropdown.Item>
 								<NavDropdown.Item
-									style={{ fontSize: '16px' }}
+									style={{ fontSize: '20px' }}
 									href='#'
 									onClick={quiz}
 								>
@@ -151,14 +151,14 @@ const Dashboard = (props) => {
 								{props.currUser.accessLevel !== 0 && (
 									<React.Fragment>
 										<NavDropdown.Item
-											style={{ fontSize: '16px' }}
+											style={{ fontSize: '20px' }}
 											onClick={admin}
 											href='#'
 										>
 											Add Accidents
 										</NavDropdown.Item>
 										<NavDropdown.Item
-											style={{ fontSize: '16px' }}
+											style={{ fontSize: '20px' }}
 											onClick={users}
 											href='#'
 										>
@@ -169,7 +169,7 @@ const Dashboard = (props) => {
 								<NavDropdown.Divider />
 
 								<NavDropdown.Item
-									style={{ fontSize: '16px' }}
+									style={{ fontSize: '20px' }}
 									onClick={logOut}
 									href='#'
 								>

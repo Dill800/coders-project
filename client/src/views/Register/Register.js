@@ -110,7 +110,7 @@ const Register = (props) => {
 <Form.Row>
     <Form.Group as={Col} controlId="formGridState">
       <Form.Label>State</Form.Label>
-      <Form.Control required as="select" onChange={onStateChange}>
+      <Form.Control style={{fontSize: "20px"}} required as="select" onChange={onStateChange}>
         <option>Choose...</option>
         <option>Alabama</option>
         <option>Alaska</option>
@@ -171,7 +171,7 @@ const Register = (props) => {
 
   <div>
   <Form.Group className="inline" id="formGridCheckbox">
-    <Form.Check onChange={onDashCamChecked} type="checkbox" label="I have a dashcam in my car"/>
+    <Form.Check style={{fontSize: "20px"}} onChange={onDashCamChecked} type="checkbox" label="I have a dashcam in my car"/>
   </Form.Group>
   </div>
 
@@ -183,7 +183,7 @@ const Register = (props) => {
   </Button>
   </Form.Group>
 </Form>
-<div className='already-have-an-account-container'>
+<div className='already-have-an-account-container' style={{marginBottom: "20px", fontSize: "20px"}}>
     <Link to='/'>Already Have an Account?</Link>
 </div>
 

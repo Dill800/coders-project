@@ -27,6 +27,16 @@ const ViewUser = (props) => {
 			});
 	}
 
+	function levelDescription(level) {
+		if(level === 0) {
+			return "Normal User";
+		}
+		if(level === 1) {
+			return "Insurance Company"
+		}
+		return "Admin"
+	}
+
 	const viewUser = props.data.map((directory) => {
 		if (directory.email == props.selected)
 			return (
@@ -37,7 +47,7 @@ const ViewUser = (props) => {
 								Email: {directory.email}
 							</p>
 							<p style={{ fontSize: '18px' }}>
-								Access Level: {directory.accessLevel}
+								Access Level: {levelDescription(directory.accessLevel)}
 							</p>
 							<p style={{ fontSize: '18px' }}>
 								State: {directory.state}

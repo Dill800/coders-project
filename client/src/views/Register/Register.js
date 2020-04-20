@@ -16,7 +16,14 @@ const Register = (props) => {
     const [dashcam, setDashcam] = useState(false);
 
     const submit = (event) => {
+
         event.preventDefault();
+
+        if (state == ''){
+          alert("Please select a state");
+          return;
+        }
+
         axios.post('/users', {
 
           email: email,
@@ -64,6 +71,9 @@ const Register = (props) => {
       setDashcam(event.target.checked)
   }
 
+  const checkStateFieldEmpty = (event) => {
+    alert("no state selected.");
+  }
     return (
         <Container>
             <Row className='justify-content-center'>
@@ -74,7 +84,7 @@ const Register = (props) => {
             
             </div>
 
-            <Form onSubmit={submit}>
+            <Form onSubmit = {(true) ? submit : checkStateFieldEmpty}>
 
 {/* Forms Boxes */}
 <Form.Row>

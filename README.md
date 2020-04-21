@@ -65,7 +65,9 @@ Accident Endpoints:
 * /questionData [POST] - Inserts a quiz question into the database.
 * /questionData/answer [POST] - Determines if chosen answer to a quiz question is correct. 
 
-##Scripts
+## Scripts
 npm run-scripts client - Runs client only
+
 npm run-scripts server - Runs server only
+
 npm run-scripts dev - Starts client and server code

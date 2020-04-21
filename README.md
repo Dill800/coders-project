@@ -21,7 +21,18 @@ In addition, insurance companies will have the option to reward individuals for 
 * Recharts
 
 ## Config File
-While developing, API keys were stored in the config.js file. Since the web app has been deployed, the config.js has become an environmental variable. The login credentials used are to a private account and will not be revealed here.
+While developing locally, API keys were stored in the config.js file. Since the web app has been deployed, the config.js has become an environmental variable. The login credentials used are to a private account and will not be revealed here.
+
+In order to setup the local config file, create a config directory under the /server path. Inside this /server/config folder, create a config.js file. The contents of the config file should follow the following format: 
+```
+module.exports = {
+    db : {
+        uri : '', // place uri in ticks
+    },
+    darkSkyApiKey : '', // Dark Sky API key in ticks
+    openCageKey: '' // Open Cage API key in ticks
+}
+```
 
 ## Client
 We developed the frontend of this application using React and Boostrap (specifically, the Materia theme). Components that represent general pages on our application can be found in the /src/views folder, and smaller components that are added to the general pages can be found in src/components. The src/assets folder holds information about the Materia bootstrap theme.

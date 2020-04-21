@@ -1,79 +1,60 @@
-# Traffic Statistics Website ### 
-## Team Coders
+# README
 
-### Stack: MERN stack with Password.js for authentication.
+## Project Description
+The main objective of the web application is to encourage safe driving by reinforcing common road rules and displaying data on traffic accidents per city to foster a competitive spirit for safe driving. Users will be able to see “competing” cities and work towards making their city the one with the safest drivers and least number of traffic accidents. 
 
-## _**PLEASE READ THIS TO COMPLETION BEFORE ASKING ANY QUESTIONS!**_
+In addition, insurance companies will have the option to reward individuals for their safe driving habits by giving them insurance discounts. Users from the “safest city” could also be rewarded with insurance discounts. All discounts are up to the companies’ discretion.
+	
+## Project Features
+* View traffic accident data on user-defined days for select cities
+* Add traffic accident data to the database
+* View the weather on select days
+* Login with email and password
+* Verify user’s data is valid when creating the account
+* Allow users to take a driving quiz
+* View user contact information and number of earned stars
 
-### _**IMPORTANT NOTES**_ - 
-This project does not have a mongoDB connection setup. Setup the connection based on the environments below.
-- local development: create a config file (make sure to name it config.js) in the config folder, which exports your db.uri connection. An example is provided, config/config.example.js. This file will be ignored by git so your db credentials will be kept safe when the app is deployed.
-- production: Since the config file is not pushed when you deploy your app, you must specifiy your db uri in heorku. Set the uri in heroku as specified in [this](https://devcenter.heroku.com/articles/config-vars) resource. Make sure you name the environement variable "DB_URI".
+## Project APIs
+* Passport.js
+* Open Cage
+* Dark Sky
+* Recharts
 
-This project contains an example project board meant to showcase how one can be used. The issues posted to it are not real issues.
+## Config File
+While developing, API keys were stored in the config.js file. Since the web app has been deployed, the config.js has become an environmental variable. The login credentials used are to a private account and will not be revealed here.
 
-## Getting Started
-This repository aims to assist you in beginning work on a MERN stack application for heroku deployment with a solid file structure as a foundation. To get started make a copy of this template repo for your project teams by clicking the green "Use this template" button above.
+## Client
+We developed the frontend of this application using React and Boostrap (specifically, the Materia theme). Components that represent general pages on our application can be found in the /src/views folder, and smaller components that are added to the general pages can be found in src/components. The src/assets folder holds information about the Materia bootstrap theme.
 
-Since this project will hold both the client application and the server application there will be node modules in two different places. First run `npm install` from the root. After this you will run `npm run-script install-all` from the root. From now on run this command anytime you want to install all modules again. This is a script we have defined in package.json. Alternatively your group may choose to simplify this process by using yarn workspaces as specified [here](https://yarnpkg.com/lang/en/docs/workspaces/).
+We used the Recharts React library in order to visually display accident data as a bar chart.
 
-This app can be deployed directly to heroku since there is a script defined in package.json which will automatically handle building and deploying the app. For more information on deploying to heroku reference the extra resources at the bottom of this file. 
+tokenManager.js is used to handle user login authentication.
 
+## Server
+We used Node.js and Express.js to set up our backend. Brief descriptions of each route are listed below:
 
-## Available Scripts
+User Endpoints:
+* /users [POST] - Determines if the user already exists in the database. If not, create the user based on the request's body.
+* /users/login [POST] - Logs in the user and saves information in a cookie.
+* /users/getUsers [GET] - Retrieves all users in the database.
+* /users/updatePrivilege [POST] - Promotes / Demotes user based on access level.
+* /users/getStars [GET] - Retrieves the stars of the currently logged in user.
 
-Please note that any time the server is run in these scripts `nodemon` is used in place of `node` for easier development. If you are interested in how this works follow the nodemon In the project directory, you can run:
+Weather Endpoint:
+* /weather [GET] - Gets the overall weather data in a certain city/state location on a specific day.
 
-### `npm run-script dev`
+Accident Endpoints:
+* /accidentData [POST] - Creates a new accident entry.
+* /accidentData [GET] - Retrieves all accidents in the database.
+* /accidentData/accidentsOnDay [GET] - Retrieves all of the accidents on a specific day. 
+* /accidentData/totalInfo [GET] - Returns the city, number of accidents, and weather on a particular day.
+* /accidentData/distinct [GET] - Returns a list of all of the distinct city/state combinations in the accident database.
 
-Runs both the client app and the server app in development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view the client in the browser.
+* /questionData [GET] - Retrieves all of the quiz questions from the database.
+* /questionData [POST] - Inserts a quiz question into the database.
+* /questionData/answer [POST] - Determines if chosen answer to a quiz question is correct. 
 
-### `npm run-script client`
-
-Runs just the client app in development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view the client in the browser.
-
-
-### `npm run-script server`
-
-Runs just the server in development mode.<br>
-
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-If deploying to heroku this does not need to be run since it is handled by the heroku-postbuild script<br>
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-
-## File structure
-#### `client` - Holds the client application
-- #### `public` - This holds all of our static files
-- #### `src`
-    - #### `assets` - This folder holds assets such as images, docs, and fonts
-    - #### `components` - This folder holds all of the different components that will make up our views
-    - #### `views` - These represent a unique page on the website i.e. Home or About. These are still normal react components
-    - #### `App.js` - This is what renders all of our browser routes and different views
-    - #### `index.js` - This is what renders the react app by rendering App.js, should not change
-- #### `package.json` - Defines npm behaviors and packages for the client
-#### `server` - Holds the server application
-- #### `config` - This holds our configuration files, like mongoDB uri
-- #### `controllers` - These hold all of the callback functions that each route will call
-- #### `models` - This holds all of our data models
-- #### `routes` - This holds all of our HTTP to URL path associations for each unique url
-- #### `tests` - This holds all of our server tests that we have defined
-- #### `server.js` - Defines npm behaviors and packages for the client
-#### `package.json` - Defines npm behaviors like the scripts defined in the next section of the README
-#### `.gitignore` - Tells git which files to ignore
-#### `README` - This file!
-
-## Learn More
-To learn how to setup a local MongoDB instance for testing, check out how to [connect to MongoDB](https://docs.mongodb.com/guides/server/drivers/).
-
-To learn how to deploy a full-stack web app to heroku, check out [this great guide](https://daveceddia.com/deploy-react-express-app-heroku/).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+##Scripts
+npm run-scripts client - Runs client only
+npm run-scripts server - Runs server only
+npm run-scripts dev - Starts client and server code

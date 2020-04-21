@@ -134,12 +134,7 @@ const Dashboard = (props) => {
 								title='Menu'
 								id='basic-nav-dropdown'
 							>
-								<NavDropdown.Item
-									style={{ fontSize: '20px' }}
-									href='#'
-								>
-									Profile
-								</NavDropdown.Item>
+								
 								<NavDropdown.Item
 									style={{ fontSize: '20px' }}
 									href='#'
